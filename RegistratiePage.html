@@ -8,9 +8,12 @@
     <link rel="stylesheet" href="./CSS/registratie.css" />
   </head>
   <body>
-    <div class="nav">
-      <img src="./Assets/logo.png" alt="" />
-    </div>
+    <header>
+      <div class="nav">
+        <img src="./Assets/logo.png" alt="" />
+      </div>
+    </header>
+
     <main>
       <div class="linkerkant">
         <div class="container">
@@ -33,8 +36,40 @@
             <div class="driehoek"></div>
           </div>
         </div>
+        <div class="afbeelding-vinicius"></div>
       </div>
-      <div class="rechterkant"></div>
+
+      <div class="rechterkant">
+        <h1>Het ultieme voetbal quiz</h1>
+        <form action="">
+          <label for="username">Gebruikersnaam</label>
+          <input
+            type="text"
+            placeholder="Gebruikersnaam"
+            id="username"
+            name="username"
+            required
+          />
+
+          <label for="password">Wachtwoord:</label>
+          <input
+            type="password"
+            placeholder="Wachtwoord:"
+            name="password"
+            required
+          />
+
+          <label for="confirm-password">Herhaal Wachtwoord:</label>
+          <input
+            type="password"
+            placeholder="Herhaal Wachtwoord"
+            id="confirm-password"
+            name="confirm-password"
+            required
+          />
+          <button>Registreren</button>
+        </form>
+      </div>
     </main>
   </body>
 </html>
