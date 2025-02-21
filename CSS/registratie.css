@@ -8,3 +8,23 @@ body {
   color: white;
   grid-column: 1/3;
 }
+.Patroon {
+  display: flex;
+
+  margin-bottom: 10px;
+}
+
+.driehoek {
+  width: 5px;
+  height: 5px;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 40px solid green;
+  margin: 0 5px;
+}
+.linkerkant {
+  background-color: darkblue;
+}
+.rechterkant {
+  background-color: black;
+}
