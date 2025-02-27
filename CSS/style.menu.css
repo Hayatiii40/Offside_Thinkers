@@ -1,0 +1,36 @@
+body{
+    background-image: url("../Assets/menu-background.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 90vh;
+    overflow: hidden;
+}
+.card-style{
+    height: 150px;
+    width: 140px;
+
+}
+.card-style-spelen{
+    height: 220px;
+    width: 560px;
+    background-image: url("../Assets/spelen-foto.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.row-style{
+    margin-left: 0px;
+    margin-top: 30px;
+}
+.container-menu{
+    margin-top: 150px;
+    margin-left: 40px;
+}
+.card-titel-tekst{
+    color:white;
+}
+.little-card-titel{
+    font-size: 14px;
+    text-align: center;
+}
