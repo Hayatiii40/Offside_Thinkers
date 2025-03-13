@@ -25,7 +25,7 @@ nav {
 h2 {
   font-weight: bold;
   color: white;
-  font-size: 3rem;
+  font-size: 30px;
   margin-left: 10vw;
   position: relative;
   top: 50px;
@@ -41,10 +41,10 @@ h2 {
 }
 .container_beneden {
   position: relative;
-  top: 80px;
+  top: 150px;
   display: flex;
   flex-direction: column;
-  align-items: flex-end; /* Zorgt voor rechts uitlijnen */
+  align-items: flex-end;
 }
 
 .Patroon_beneden {
@@ -64,10 +64,10 @@ h2 {
 .afbeelding-vinicius {
   background-image: url(../Assets/vinicius-removebg-preview.png);
   background-size: cover;
-  position: absolute;
+  position: fixed;
   bottom: 0px;
-  height: 30vw;
-  width: 30vw;
+  height: 400px;
+  width: 400px;
   left: 5vw;
 }
 .rechterkant {
@@ -75,9 +75,9 @@ h2 {
 }
 h1 {
   color: #ffffff;
-  font-size: 50px;
+  font-size: 35px;
   position: relative;
-  right: 15vw;
+  right: 10vw;
 }
 form {
   margin: auto;
@@ -134,7 +134,7 @@ button:active {
   top: 4px;
   box-shadow: seagreen 0px 3px 2px, #000 0px 3px 5px;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
   .afbeelding-vinicius {
     display: none;
   }
@@ -142,5 +142,43 @@ button:active {
   h2 {
     position: relative;
     right: 20vw;
+  }
+  h1 {
+    font-size: 25px;
+  }
+  body {
+    width: 100vw;
+  }
+}
+@media screen and (max-width: 550px) {
+  form {
+    background: none;
+    right: 30vw;
+  }
+  h1 {
+    font-size: 25px;
+    margin-top: 100px;
+  }
+  h2 {
+    font-size: 20px;
+  }
+  h1,
+  h2 {
+    margin-right: 50px;
+  }
+
+  form label {
+    color: white;
+  }
+  form input {
+    background: none;
+  }
+  .Patroon:nth-child(1),
+  .Patroon:nth-child(2) {
+    display: none;
+  }
+  .Patroon_beneden:nth-child(4),
+  .Patroon_beneden:nth-child(3) {
+    display: none;
   }
 }
