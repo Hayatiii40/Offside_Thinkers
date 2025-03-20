@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./CSS/reset.css" />
+    <link rel="stylesheet" href="./CSS/landing.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <script src="Javascript/landpg.js" defer></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <p class="logo">
+        <img src="Assets/offsidelogo.png" alt="offsideThinkersLogo" />
+      </p>
+      <p><a class="logger" href="InlogPagina.html">Log in</a></p>
+      <p class="prof">
+        <i class="fa-solid fa-user" style="color: #ffffff"></i>
+      </p>
+    </header>
+    <main>
+      <div class="zone1">
+        <p id="vergrootglas">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        </p>
+        <input type="text" placeholder="Zoek je project" />
+        <button>Zoeken</button>
+      </div>
+      <div id="warning">
+        <p>Je hebt geen toegang tot deze spel</p>
+        <button id="warbut">Sluiten</button>
+      </div>
+      <div class="zone2">
+        <a href="InlogPagina.html"
+          ><article class="no" id="fifa">Fifa</article></a
+        >
+        <a href=""
+          ><article class="forbidden" id="fortnite">Fortnite</article></a
+        >
+        <a href=""
+          ><article class="forbidden" id="lego">Lego Masters</article></a
+        >
+        <a href=""><article class="forbidden" id="lotr">LOTR</article></a>
+        <a href=""><article class="forbidden" id="MTG">MTG</article></a>
+        <a href=""><article class="forbidden" id="pokemon">Pokemon</article></a>
+      </div>
+    </main>
+  </body>
+</html>
