@@ -9,6 +9,9 @@ main {
   display: grid;
   grid-template-columns: 50vw 50vw;
 }
+a {
+  text-decoration: underline;
+}
 header {
   background-color: black;
   color: white;
@@ -22,13 +25,13 @@ header {
 nav {
   margin-top: 15px;
 }
+
 h2 {
   font-weight: bold;
-  color: white;
+  color: black;
   font-size: 30px;
-  margin-left: 10vw;
+
   position: relative;
-  top: 50px;
 }
 .driehoek {
   width: 5px;
@@ -40,8 +43,9 @@ h2 {
   padding: 5px 0 10px;
 }
 .container_beneden {
-  position: relative;
-  top: 150px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -50,7 +54,14 @@ h2 {
 .Patroon_beneden {
   display: flex;
 }
-
+.rechterkant {
+  grid-column: 1/3;
+  grid-row: 1/3;
+}
+.container {
+  position: absolute;
+  top: 100px;
+}
 .driehoek_beneden {
   width: 5px;
   height: 5px;
@@ -61,7 +72,7 @@ h2 {
   padding: 5px 0 10px;
 }
 
-.afbeelding-vinicius {
+/* .afbeelding-vinicius {
   background-image: url(../Assets/vinicius-removebg-preview.png);
   background-size: cover;
   position: fixed;
@@ -69,7 +80,7 @@ h2 {
   height: 400px;
   width: 400px;
   left: 5vw;
-}
+} */
 .rechterkant {
   justify-content: center;
 }
@@ -85,11 +96,16 @@ form {
   border-radius: 10px;
   padding: 50px;
   line-height: 40px;
-  width: 350px;
+  width: 500px;
   background: linear-gradient(to right, #a6a6a6, #ffffff);
   position: relative;
   top: 100px;
+  text-align: center;
 }
+form * {
+  display: block;
+}
+
 form input {
   border: 2px solid black;
   border-radius: 5px;
@@ -97,21 +113,20 @@ form input {
   color: gray;
   padding: 5px;
   height: 45px;
-  width: 240px;
+  width: 400px;
 }
 form label {
   color: black;
   font-weight: bold;
+  text-align: center;
 }
 
 button {
-  --bg: rgb(101, 211, 101);
-  --text-color: rgb(255, 255, 255);
   position: relative;
   width: 150px;
   border: none;
-  background: var(--bg);
-  color: var(--text-color);
+  background: rgb(101, 211, 101);
+  color: rgb(255, 255, 255);
   padding: 1em;
   font-weight: bold;
   text-align: center;
@@ -120,7 +135,7 @@ button {
   border-radius: 5px;
   height: 70px;
   margin-top: 50px;
-  width: 240px;
+  width: 400px;
   opacity: 0.8;
   letter-spacing: 1px;
   box-shadow: seagreen 0px 7px 2px, #000 0px 8px 5px;
@@ -138,41 +153,12 @@ button:active {
   .afbeelding-vinicius {
     display: none;
   }
-  form,
-  h2 {
-    position: relative;
-    right: 20vw;
-  }
-  h1 {
-    font-size: 25px;
-  }
+
   body {
     width: 100vw;
   }
 }
-@media screen and (max-width: 550px) {
-  form {
-    background: none;
-    right: 30vw;
-  }
-  h1 {
-    font-size: 25px;
-    margin-top: 100px;
-  }
-  h2 {
-    font-size: 20px;
-  }
-  h1,
-  h2 {
-    margin-right: 50px;
-  }
-
-  form label {
-    color: white;
-  }
-  form input {
-    background: none;
-  }
+@media screen and (max-width: 768px) {
   .Patroon:nth-child(1),
   .Patroon:nth-child(2) {
     display: none;
@@ -180,5 +166,40 @@ button:active {
   .Patroon_beneden:nth-child(4),
   .Patroon_beneden:nth-child(3) {
     display: none;
+  }
+  h1 {
+    display: none;
+  }
+}
+@media screen and (max-width: 550px) {
+  form {
+    position: relative;
+    top: 100px;
+
+    width: 420px;
+  }
+  form input {
+    width: 300px;
+  }
+
+  header {
+    display: flex;
+    justify-content: center;
+  }
+
+  button {
+    margin-top: 20px;
+    width: 300px;
+  }
+
+  h2 {
+    margin-right: 0px;
+    position: relative;
+  }
+  body {
+    background: #000;
+  }
+  form label {
+    color: black;
   }
 }

@@ -14,12 +14,12 @@
         <title>Document</title>
         <link rel="stylesheet" href="./CSS/reset.css" />
         <link rel="stylesheet" href="./CSS/registratie.css" />
+        <script src="Javascript/Registratie.js" defer></script>
       </head>
       <body>
         <header>
           <div class="nav">
             <img src="./Assets/logo.png" alt="" />
-            <img src="./Assets/logoea.png" alt="" width="75px" height="75px" />
           </div>
         </header>
 
@@ -49,27 +49,27 @@
           </div>
 
           <div class="rechterkant">
-            <h1>Het ultieme voetbal quiz</h1>
-            <h2>Log in op uw account</h2>
-            <form action="">
+            <form id="Formulier" action="POST">
+              <h2>Log in op uw account</h2>
               <label for="username">Gebruikersnaam:</label>
               <input
                 type="text"
                 placeholder="Gebruikersnaam"
                 id="username"
                 name="username"
-                required
               />
 
               <label for="password">Wachtwoord:</label>
               <input
                 type="password"
+                id="Password"
                 placeholder="Wachtwoord"
                 name="password"
-                required
               />
-
-              <button>Inloggen</button>
+              <a class="Account" href="RegistratiePage.html"
+                >Geen account? <br />Maak uw account aan</a
+              >
+              <button type="submit">Inloggen</button>
             </form>
             <div class="container_beneden">
               <div class="Patroon_beneden">
