@@ -1,0 +1,167 @@
+ @import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@400;700&display=swap');
+
+ 
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+height: 98vh; 
+   width: 98vw;
+    background-image: url('../img/stad.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: black;
+    justify-content: center;
+    align-items: center;
+display: grid;
+text-align: center;
+grid-template-rows: 1fr 1fr ;
+    font-family: 'Oxanium', sans-serif;
+
+}
+
+main {
+    display: grid;
+grid-template-columns: 1fr;
+grid-template-rows: 1fr 1fr 1fr 1fr ;    align-items: center;
+}
+
+
+
+.nav-links{
+    display: flex;   
+    justify-content: center;
+    align-items: center;  
+    position: relative;    
+    margin-top: 1rem;  
+
+}
+
+.input{
+    padding-left: 3rem;
+    width: 27rem;
+    height: 2.5rem;
+    border: 2px solid #727272;
+    border-radius: 5rem;
+    justify-content: center;
+    color: #727272;
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+.searchbut{
+    background-color:white;
+    height: 2rem;
+    width: 10rem;
+    border-radius:5rem ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1rem;
+    color: black;
+    font-weight: 600;
+
+    
+}
+
+
+.Blacklist {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px 50px;
+    border-radius: 20px;
+    font-size: 60px;  
+    font-weight: bold;
+    margin: 10px auto;
+    width: 800px;
+}
+
+.container-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 800px; 
+    padding: 15px;
+}
+
+
+#foto {
+    width: 100px; 
+    height: auto;
+}
+
+#item {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 30px;  
+    font-weight: bold;
+    text-align: center;
+    width: 300px;
+    /* height: 50px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto;
+
+}
+
+.delete-btn {
+    width: 50px; 
+    height: 50px;
+    background: white;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+@media screen and (max-width: 768px) {
+    .Blacklist {
+        font-size: 30px;
+        padding: 10px;
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        margin-left: 30px;
+    }
+
+    .container-wrapper {
+        width: 100%;
+        max-width: 400px;
+        display: flex;
+        flex-direction: row;  
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;  
+    }
+
+    #foto {
+        width: 100px; 
+        height: auto;
+    }
+
+    #item {
+        width: 400px;
+        font-size: 16px;
+        text-align: center;
+        padding: 15px 20px;
+        height: 15px;
+    }
+
+    .delete-btn {
+        width: 100px; 
+        height: 50px;        
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+    }
+}
