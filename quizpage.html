@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="CSS/reset.css">
     <link rel="stylesheet" href="CSS/quiz.css" />
     <script type="module" src="Javascript/quiz.js"></script>
   </head>
@@ -12,12 +13,17 @@
     <nav class="navbar">
       <img src="./Assets/image-removebg-preview.png" alt="logo" />
     </nav>
-
+<main class="gamepage">
     <div class="quiz-container">
       <section class="quiz-head">
-        <h2 class="al">Score: 349</h2>
+        <h2 class="al">349</h2>
 
-        <p id="timer">TIME:01:00</p>
+        <p id="timer">⏱ 60s</p>
+        
+
+        <button class="tips-button">
+          💡
+        </button>
       </section>
 
       <img
@@ -27,13 +33,7 @@
       />
       <div class="container-1">
         <div class="question">Welke team is dat?</div>
-        <button class="tips-button">
-          <img
-            class="tips-foto"
-            src="Assets/quick-tips_14899097.png"
-            alt="quick-tips_14899097"
-          />
-        </button>
+        
 
         <!-- <a class="sx" href="foto"> <img class="ksks" src="img/quick-tips_14899097.png"
                     alt="quick-tips_14899097"></a> -->
@@ -45,6 +45,7 @@
         <div class="option" id="four">PSG</div>
       </div>
     </div>
+  </main>
     <footer></footer>
   </body>
 </html>
