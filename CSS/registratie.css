@@ -1,7 +1,8 @@
 body {
   display: grid;
   grid-template-rows: 10vh 90vh;
-  background: linear-gradient(to right, #20243d, #111418, #1e2026);
+  background: linear-gradient(to right, #20243d, hsl(214, 17%, 8%), #1e2026);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 main {
