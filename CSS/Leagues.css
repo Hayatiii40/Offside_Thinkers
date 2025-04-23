@@ -1,0 +1,152 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('/Images/bgr.png') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+  }
+  
+  h2, h3, h4 {
+    text-align: center;
+    text-shadow: 2px 2px 4px #000;
+  }
+  
+  #leagueList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 40px;
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 50px;
+  }
+  
+  .league-container {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+    text-align: center;
+  }
+  
+  .league-container:hover {
+    transform: scale(1.03);
+  }
+  
+  .league-container img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    background-color: #124476;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0f78d1;
+  }
+  
+  .team-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 15px;
+    width: 100%;
+  }
+  
+  .team-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0;
+    color: white;
+  }
+  
+  .team-list img {
+    width: 30px;
+    height: auto;
+  }
+  
+  #favoriteLeaguesList {
+    margin-top: 30px;
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  #favoriteLeaguesList li {
+    background: rgba(23, 23, 0, 0.5);
+    padding: 10px 15px;
+    border-radius: 10px;
+    color: #fff;
+    box-shadow: 0 4px 12px rgb(253, 255, 254);
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  #favoriteLeaguesList button {
+    margin-left: 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  #favoriteLeaguesList button:hover {
+    background-color: #c82333;
+  }
+  
+.top-bar {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 40px;
+  }
+  
+  .top-bar h2 {
+    flex-grow: 1;
+    text-align: center;
+    margin: 0;
+  }
+  
+  .menu-button {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #124476;
+    color: white;
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .menu-button:hover {
+    background-color: #0f78d1;
+  }
+  
+  
