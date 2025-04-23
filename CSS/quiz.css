@@ -10,7 +10,12 @@ body {
   font-family: Arial, sans-serif;
   background-color: #34495e;
 }
-
+.gamepage{
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .navbar img {
   width: 150px;
 }
@@ -28,43 +33,120 @@ body {
 
 .quiz-head {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  margin: 1rem 20rem;
+  padding: 0.8rem 1.5rem;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid #4133ff;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #4133ff, 0 0 20px #4133ff;
+  backdrop-filter: blur(6px);
+  font-size: 20px;
+}
+.quiz-container{
+  background-color: #abd7ebbb;
+  margin: 0 20rem;
+  padding-bottom: 3rem;
+  border: 2px solid #4133ff;
+  animation: neonGlow 2s infinite ease-in-out;
+  box-shadow: 0 0 8px #4133ff, 0 0 16px #4133ff, 0 0 24px #4133ff;
+  border-radius: 20px;
+}
+@keyframes neonGlow {
+  0% {
+    box-shadow: 0 0 5px #4133ff, 0 0 10px #4133ff, 0 0 20px #4133ff, 0 0 30px #4133ff;
+  }
+  50% {
+    box-shadow: 0 0 10px #4133ff, 0 0 30px #4133ff, 0 0 40px #4133ff, 0 0 50px #4133ff;
+  }
+  100% {
+    box-shadow: 0 0 5px #4133ff, 0 0 10px #4133ff, 0 0 20px #4133ff, 0 0 30px #4133ff;
+  }
+}
+.quiz-head .al,
+.quiz-head #timer {
+  background: none;
+  
+  font-weight: bold;
+  margin: 0;
+  padding: 0 10px;
+  font-size: 1.3rem;
+}
+.quiz-head .al {
+  color: rgb(255, 174, 0);
+  text-shadow: 0px 0px 3px #e9c38a;
+  font-size: 1.7rem;
+  position: relative;
+  overflow: hidden;
 }
 
-.al,
-#timer {
-  font-size: 24px;
-  margin: 50px;
+
+.quiz-head .al::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.3) 0%, rgba(255,255,255,0.8) 50%, rgba(255, 255, 255, 0.3) 100%);
+  transform: skewX(-20deg);
+  /* animation: shine 2.5s infinite ease-in-out; */
 }
+
+@keyframes shine {
+  0% {
+    left: -75%;
+  }
+  80% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+#timer.flash-shake {
+  
+  color: red;
+  font-weight: bold;
+}
+
+
 
 .team-logo {
-  width: 250px;
-  height: 150px;
-
-  border-radius: 50%;
+  /* width: 250px; */
+  height: 320px;
+  border-radius: 10px;
   padding: 10px;
   margin: 10px auto;
+  
+  
+  
 }
 
 .question {
-  font-size: 28px;
-  background: rgba(255, 255, 255, 0.85);
+  /* font-size: 30px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.801);
   color: black;
-  padding: 20px;
-  border-radius: 15px;
-  display: flex;
+  padding: 15px;
+  border-radius: 20px;
   align-items: center;
   justify-content: center;
-  width: 900px;
+  width: 770px;
+  border: 1px solid #4133ff; */
+  display: none;
 }
 
 .options {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+  gap: 10px;
   max-width: 800px;
   margin: 10px auto;
+  font-weight: 600;
+  
 }
 
 .option {
@@ -74,10 +156,25 @@ body {
   border-radius: 20px;
   font-size: 20px;
   cursor: pointer;
+  border: 1px solid #4133ff;
 }
 
 .option:hover {
-  background: #ddd;
+  border:none;
+  color: white;
+  animation: neonGlow2 0.2s 1 ease-in-out forwards,background-color 1s 1 ease-in-out forwards;;
+  /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+}
+@keyframes neonGlow2 {
+  0% {
+    box-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
+    background: white;
+  }
+  100% {
+    box-shadow: 0 0 10px #4133ff, 0 0 15px #4133ff;
+    background-color: #4133ff;
+  }
+  
 }
 
 .container-1 {
@@ -87,14 +184,18 @@ body {
   margin: 0px auto;
 }
 .tips-button {
-  display: inline;
-  background-color: none;
-  position: absolute;
-  display: flex;
-  top: 24rem;
-  right: 5.5rem;
-  border-radius: 100%;
+  background: rgba(255, 255, 255, 0);
+  padding: 5px;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  /* box-shadow: 0 0 6px #ffae00; */
+  transition: transform 0.3s ease,text-shadow 0.3s ease;
 }
+.tips-button:hover{
+  transform: scale(1.1);
+  text-shadow: 0 0 25px #ffae00;
+}
+
 .tips-foto {
   width: 50px;
   background: rgba(255, 255, 255, 0.5);

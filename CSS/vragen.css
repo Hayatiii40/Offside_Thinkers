@@ -9,6 +9,9 @@ body {
   flex-direction: column;
   height: 100vh;
   margin: 0;
+  font-size: 24px;
+  overflow-x: hidden;
+  
 }
 
 main {
@@ -18,23 +21,22 @@ main {
   justify-content: center;
   align-items: center;
   padding-top: 5rem;
+  margin-top: 0rem;
 }
 
 header {
   display: flex;
   flex-direction: row;
-  position: fixed;
+  
   z-index: 300;
   width: 100vw;
   padding: 10px 0;
   justify-content: space-between;
   align-items: center;
+
 }
 
-.ealogo {
-  height: 4rem;
-  margin-left: 20px;
-}
+
 
 h1 {
   font-size: 2.2rem;
@@ -48,6 +50,7 @@ h1 {
   padding: 10px;
   border-radius: 10px;
   margin: 0.5rem 0;
+  
 }
 
 .answer {
@@ -56,6 +59,7 @@ h1 {
   padding: 7px;
   border-radius: 10px;
   margin-bottom: 1rem;
+  
 }
 
 .container {
@@ -69,14 +73,10 @@ h1 {
   justify-content: center;
   align-items: center;
   padding: 2rem;
-  transform-origin: top center;
-  transform: scaleY(1);
-  transition: transform 0.8s ease-out;
+  
 }
 
-.container.open {
-  transform: scaleY(1);
-}
+
 
 #personInfo {
   text-align: center;
@@ -94,6 +94,7 @@ h1 {
   transform-origin: top center;
   transform: scaleY(1);
   transition: transform 0.8s ease-out;
+  
 }
 
 #personInfo.open {
@@ -107,7 +108,14 @@ h1 {
   margin: 0;
 }
 
-@media (max-width: 430px) {
+
+
+@media (max-width: 425px) {
+  body{
+    overflow-y:visible;
+    font-size: 1rem ;
+  }
+
   .question {
     font-size: 1rem;
   }
@@ -115,6 +123,7 @@ h1 {
   .answer {
     margin-bottom: 0.5rem;
     padding: 5px;
+    font-size: 1rem;
   }
 
   .container {
@@ -130,4 +139,8 @@ h1 {
     margin-left: 0;
     margin-top: 10px;
   }
+  body{
+    overflow-y: visible;
+  }
+  
 }
