@@ -3,35 +3,63 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Keepie Uppie Game</title>
+  <title>Football Juggler</title>
   <style>
     body {
       margin: 0;
-      font-family: sans-serif;
-      background: #1e1e1e;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #000000; /* Grass field */
+      background-size: cover;
+      background-position: center;
       color: white;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-    canvas {
-      background: #222;
-      border: 2px solid white;
-      margin-top: 20px;
-      
-    }
+
     h1 {
       margin-top: 20px;
+      font-size: 2.5rem;
+      color: #f5f5f5;
+      text-shadow: 2px 2px 4px #000000;
     }
+
+    p {
+      margin: 5px;
+      font-size: 1.2rem;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    canvas {
+      background: url('https://media.istockphoto.com/id/506692747/photo/artificial-grass.jpg?s=2048x2048&w=is&k=20&c=DPyp1UFqu5Mu7mmlsXTgROWcGeiVON5dg_WXfBi02LE=');
+      border: 3px solid rgb(195, 199, 255);
+      border-radius: 10px;
+      margin-top: 20px;
+      box-shadow:
+        0 0 10px blue,
+        0 0 30px blue,
+        0 0 50px blue,
+        0 0 70px blue;
+    }
+
     #scoreboard {
       margin-top: 10px;
+      padding: 10px 20px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      border: 2px solid white;
+      box-shadow: 0 0 15px black;
+    }
+
+    #scoreboard p {
+      margin: 5px 0;
     }
   </style>
 </head>
 <body>
-  <h1>Keepie Uppie</h1>
-  <p>Click the ball to keep it up!</p>
-  <canvas id="gameCanvas" width="700" height="600"></canvas>
+  <h1>⚽ Football Juggler</h1>
+  <p>Click the football to keep it up!</p>
+  <canvas id="gameCanvas" width="900" height="630"></canvas>
   <div id="scoreboard">
     <p>Score: <span id="score">0</span></p>
     <p>High Score: <span id="highScore">0</span></p>
@@ -43,8 +71,8 @@
     const scoreText = document.getElementById("score");
     const highScoreText = document.getElementById("highScore");
 
-    let ballImg = new Image();
-    ballImg.src = "https://www.pngplay.com/wp-content/uploads/12/Soccer-Ball-PNG-Photo-Image.png";
+    const football = new Image();
+    football.src = "https://cdn.pixabay.com/photo/2013/07/13/10/51/football-157930_1280.png"; // Working football image
 
     let ball = {
       x: canvas.width / 2,
@@ -54,8 +82,8 @@
       dy: 0,
     };
 
-    const gravity = 0.2;
-    const bouncePower = -10;
+    const gravity = 0.05;
+    const bouncePower = -5;
     const sidePush = 3;
 
     let score = 0;
@@ -64,8 +92,13 @@
     let gameStarted = false;
 
     function drawBall() {
-      const size = ball.radius * 2;
-      ctx.drawImage(ballImg, ball.x - ball.radius, ball.y - ball.radius, size, size);
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+      ctx.clip();
+      ctx.drawImage(football, ball.x - ball.radius, ball.y - ball.radius, ball.radius * 2, ball.radius * 2);
+      ctx.closePath();
+      ctx.restore();
     }
 
     function update() {
@@ -77,7 +110,6 @@
         ball.y += ball.dy;
         ball.x += ball.dx;
 
-        // Bounce off walls
         if (ball.x - ball.radius < 0 || ball.x + ball.radius > canvas.width) {
           ball.dx *= -1;
         }
@@ -91,7 +123,7 @@
     }
 
     function gameOver() {
-      alert("Game Over! Final Score: " + score);
+      alert("⚠️ Game Over! \nFinal Score: " + score);
       if (score > highScore) {
         highScore = score;
         localStorage.setItem("highScore", highScore);
@@ -124,11 +156,12 @@
         ball.dx = (Math.random() - 0.5) * 2 * sidePush;
         score++;
         scoreText.textContent = score;
+
         if (!gameStarted) gameStarted = true;
       }
     });
 
-    ballImg.onload = () => update(); // Start only after image loads
+    football.onload = update;
   </script>
 </body>
 </html>
