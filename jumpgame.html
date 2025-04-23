@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keepie Uppie Game</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #1e1e1e;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    canvas {
+      background: #222;
+      border: 2px solid white;
+      margin-top: 20px;
+      
+    }
+    h1 {
+      margin-top: 20px;
+    }
+    #scoreboard {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Keepie Uppie</h1>
+  <p>Click the ball to keep it up!</p>
+  <canvas id="gameCanvas" width="700" height="600"></canvas>
+  <div id="scoreboard">
+    <p>Score: <span id="score">0</span></p>
+    <p>High Score: <span id="highScore">0</span></p>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    const scoreText = document.getElementById("score");
+    const highScoreText = document.getElementById("highScore");
+
+    let ballImg = new Image();
+    ballImg.src = "https://www.pngplay.com/wp-content/uploads/12/Soccer-Ball-PNG-Photo-Image.png";
+
+    let ball = {
+      x: canvas.width / 2,
+      y: canvas.height / 2,
+      radius: 50,
+      dx: 0,
+      dy: 0,
+    };
+
+    const gravity = 0.2;
+    const bouncePower = -10;
+    const sidePush = 3;
+
+    let score = 0;
+    let highScore = localStorage.getItem("highScore") || 0;
+    highScoreText.textContent = highScore;
+    let gameStarted = false;
+
+    function drawBall() {
+      const size = ball.radius * 2;
+      ctx.drawImage(ballImg, ball.x - ball.radius, ball.y - ball.radius, size, size);
+    }
+
+    function update() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawBall();
+
+      if (gameStarted) {
+        ball.dy += gravity;
+        ball.y += ball.dy;
+        ball.x += ball.dx;
+
+        // Bounce off walls
+        if (ball.x - ball.radius < 0 || ball.x + ball.radius > canvas.width) {
+          ball.dx *= -1;
+        }
+
+        if (ball.y + ball.radius > canvas.height) {
+          gameOver();
+        }
+      }
+
+      requestAnimationFrame(update);
+    }
+
+    function gameOver() {
+      alert("Game Over! Final Score: " + score);
+      if (score > highScore) {
+        highScore = score;
+        localStorage.setItem("highScore", highScore);
+      }
+      resetGame();
+    }
+
+    function resetGame() {
+      ball.x = canvas.width / 2;
+      ball.y = canvas.height / 2;
+      ball.dx = 0;
+      ball.dy = 0;
+      score = 0;
+      gameStarted = false;
+      scoreText.textContent = score;
+      highScoreText.textContent = highScore;
+    }
+
+    canvas.addEventListener("click", function (e) {
+      const rect = canvas.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+
+      const dx = clickX - ball.x;
+      const dy = clickY - ball.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance < ball.radius) {
+        ball.dy = bouncePower - Math.random() * 2;
+        ball.dx = (Math.random() - 0.5) * 2 * sidePush;
+        score++;
+        scoreText.textContent = score;
+        if (!gameStarted) gameStarted = true;
+      }
+    });
+
+    ballImg.onload = () => update(); // Start only after image loads
+  </script>
+</body>
+</html>
