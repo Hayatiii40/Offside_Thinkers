@@ -1,5 +1,8 @@
-* {
-  font-family: arial;
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+*{
+  font-family: "Anton", sans-serif;
+
 }
 body {
   background-image: url('../Assets/menu-background.webp');

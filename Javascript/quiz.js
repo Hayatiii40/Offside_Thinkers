@@ -3,7 +3,7 @@ const timerElement = document.getElementById("timer");
 
 const countdown = setInterval(() => {
     timeLeft--;
-    timerElement.textContent = `TIME: ${timeLeft}`; // "TIME:" ekledik
+    timerElement.textContent = `TIME: ${timeLeft}`; 
 
     if (timeLeft <= 10) {
         timerElement.style.color = "red";

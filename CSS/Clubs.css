@@ -1,10 +1,13 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Special+Gothic+Expanded+One&display=swap');
+*{
+  font-family: Arial, Helvetica, sans-serif;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
 
-body {
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  text-align: center;
-  margin: 20px;
-}
 
 .club-container {
   margin: 20px;
@@ -28,11 +31,13 @@ button {
 
 body {
   margin: 0;
-  font-family: 'Arial', sans-serif;
-  background: url('/Images/bgr.png') no-repeat center center fixed;
+  font-family: "Anton", sans-serif;
+  background: url('../Assets/bg-4.jpg') no-repeat center center fixed;
   background-size: cover;
   color: white;
   text-align: center;
+  margin: 20px;
+
 }
 
 h2 {
@@ -128,7 +133,8 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px 40px;
+  padding: 30px 50px;
+  margin-left: 130px;
 }
 
 .top-bar h2 {

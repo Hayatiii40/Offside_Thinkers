@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="CSS/Lists.css">
-  <title>Document</title>
+  <script src="Javascript/Lists.js"></script>
+  <title>My Lists</title>
 </head>
 
 <body>
@@ -52,9 +53,7 @@
             <span class="badge" id="favoriteCount">0</span>
           </div>
           <div class="card-body">
-            <ul id="favoriteList">
-              <!-- Items will be added here by JavaScript -->
-            </ul>
+            <ul id="favoriteList"></ul>
             <div id="emptyFavorites" class="empty-message">No favorite clubs yet</div>
           </div>
         </div>
@@ -66,9 +65,7 @@
             <span class="badge" id="blacklistCount">0</span>
           </div>
           <div class="card-body">
-            <ul id="blacklist">
-              <!-- Items will be added here by JavaScript -->
-            </ul>
+            <ul id="blacklist"></ul>
             <div id="emptyBlacklist" class="empty-message">No blacklisted clubs</div>
           </div>
         </div>
@@ -80,9 +77,7 @@
             <span class="badge" id="leagueCount">0</span>
           </div>
           <div class="card-body">
-            <ul id="favoriteLeagues">
-              <!-- Items will be added here by JavaScript -->
-            </ul>
+            <ul id="favoriteLeagues"></ul>
             <div id="emptyLeagues" class="empty-message">No favorite leagues</div>
           </div>
         </div>
@@ -90,101 +85,7 @@
     </main>
   </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      loadLists();
-    });
-
-    function loadLists() {
-      // Load data from localStorage
-      const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-      const blacklist = JSON.parse(localStorage.getItem('blacklist')) || [];
-      const favoriteLeagues = JSON.parse(localStorage.getItem('favoriteLeagues')) || [];
-
-      // Update counts
-      document.getElementById('favoriteCount').textContent = favorites.length;
-      document.getElementById('blacklistCount').textContent = blacklist.length;
-      document.getElementById('leagueCount').textContent = favoriteLeagues.length;
-
-      // Render favorites
-      const favoriteList = document.getElementById('favoriteList');
-      const emptyFavorites = document.getElementById('emptyFavorites');
-
-      if (favorites.length > 0) {
-        emptyFavorites.style.display = 'none';
-        favoriteList.innerHTML = favorites.map(club => `
-          <li class="list-item">
-            <span class="item-name">${club}</span>
-            <button class="btn-remove" onclick="removeFromFavorites('${club}')">
-              <i class="fas fa-times"></i>
-            </button>
-          </li>
-        `).join('');
-      } else {
-        emptyFavorites.style.display = 'block';
-        favoriteList.innerHTML = '';
-      }
-
-      // Render blacklist
-      const blacklistEl = document.getElementById('blacklist');
-      const emptyBlacklist = document.getElementById('emptyBlacklist');
-
-      if (blacklist.length > 0) {
-        emptyBlacklist.style.display = 'none';
-        blacklistEl.innerHTML = blacklist.map(club => `
-          <li class="list-item">
-            <span class="item-name">${club}</span>
-            <button class="btn-remove" onclick="removeFromBlacklist('${club}')">
-              <i class="fas fa-times"></i>
-            </button>
-          </li>
-        `).join('');
-      } else {
-        emptyBlacklist.style.display = 'block';
-        blacklistEl.innerHTML = '';
-      }
-
-      // Render favorite leagues
-      const favoriteLeaguesEl = document.getElementById('favoriteLeagues');
-      const emptyLeagues = document.getElementById('emptyLeagues');
-
-      if (favoriteLeagues.length > 0) {
-        emptyLeagues.style.display = 'none';
-        favoriteLeaguesEl.innerHTML = favoriteLeagues.map(league => `
-          <li class="list-item">
-            <span class="item-name">${league}</span>
-            <button class="btn-remove" onclick="removeFavoriteLeague('${league}')">
-              <i class="fas fa-times"></i>
-            </button>
-          </li>
-        `).join('');
-      } else {
-        emptyLeagues.style.display = 'block';
-        favoriteLeaguesEl.innerHTML = '';
-      }
-    }
-
-    function removeFromFavorites(clubName) {
-      let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-      favorites = favorites.filter(club => club !== clubName);
-      localStorage.setItem('favorites', JSON.stringify(favorites));
-      loadLists();
-    }
-
-    function removeFromBlacklist(clubName) {
-      let blacklist = JSON.parse(localStorage.getItem('blacklist')) || [];
-      blacklist = blacklist.filter(club => club !== clubName);
-      localStorage.setItem('blacklist', JSON.stringify(blacklist));
-      loadLists();
-    }
-
-    function removeFavoriteLeague(leagueName) {
-      let favoriteLeagues = JSON.parse(localStorage.getItem('favoriteLeagues')) || [];
-      favoriteLeagues = favoriteLeagues.filter(league => league !== leagueName);
-      localStorage.setItem('favoriteLeagues', JSON.stringify(favoriteLeagues));
-      loadLists();
-    }
-  </script>
+  <script src="Javascript/Lists.js"></script>
 </body>
 
 </html>

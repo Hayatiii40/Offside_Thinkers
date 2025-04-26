@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="CSS/Leagues.css">
-  <title>Document</title>
+  <script defer src="Javascript/leagues.js"></script>
+  <title>Alle Leagues</title>
 </head>
 
 <body>
@@ -15,78 +16,61 @@
   </div>
 
   <div id="leagueList">
-    <div class="league-container">
+    <div class="league-container" data-league="Premier League">
       <img
         src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Premier_League_Logo.svg/280px-Premier_League_Logo.svg.png"
         alt="Premier League" />
       <h3>Premier League</h3>
-      <button onclick="setFavoriteLeague('Premier League')">
-        Voeg toe aan favorieten
-      </button>
+      <button class="add-favorite-btn">Voeg toe aan favorieten</button>
       <h4>Teams in Premier League:</h4>
       <ul class="team-list">
-        <li>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Ajax_logo.svg" alt="Manchester United" />
+        <li><img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Ajax_logo.svg" />
           <p>M</p>
         </li>
-        <li>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/47/FC_Barcelona_logo_2019.svg" alt="Liverpool" />
+        <li><img src="https://upload.wikimedia.org/wikipedia/commons/4/47/FC_Barcelona_logo_2019.svg" />
           <p>L</p>
         </li>
-        <li>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Real_Madrid_CF_logo_2014.svg" alt="Chelsea" />
+        <li><img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Real_Madrid_CF_logo_2014.svg" />
           <p>C</p>
         </li>
       </ul>
     </div>
 
-    <div class="league-container">
+    <div class="league-container" data-league="La Liga">
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/LaLiga_logo_2023.svg/241px-LaLiga_logo_2023.svg.png"
         alt="La Liga" />
       <h3>La Liga</h3>
-      <button onclick="setFavoriteLeague('La Liga')">
-        Voeg toe aan favorieten
-      </button>
+      <button class="add-favorite-btn">Voeg toe aan favorieten</button>
       <h4>Teams in La Liga:</h4>
       <ul class="team-list">
-        <li>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Ajax_logo.svg" alt="Real Madrid" />
+        <li><img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Ajax_logo.svg" />
           <p>R</p>
         </li>
-        <li>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/47/FC_Barcelona_logo_2019.svg" alt="Barcelona" />
+        <li><img src="https://upload.wikimedia.org/wikipedia/commons/4/47/FC_Barcelona_logo_2019.svg" />
           <p>B</p>
         </li>
-        <li>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Real_Madrid_CF_logo_2014.svg"
-            alt="Atletico Madrid" />
+        <li><img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Real_Madrid_CF_logo_2014.svg" />
           <p>A</p>
         </li>
       </ul>
     </div>
 
-    <div class="league-container">
+    <div class="league-container" data-league="Bundesliga">
       <img
         src="https://upload.wikimedia.org/wikipedia/en/thumb/d/df/Bundesliga_logo_%282017%29.svg/180px-Bundesliga_logo_%282017%29.svg.png"
         alt="Bundesliga" />
       <h3>Bundesliga</h3>
-      <button onclick="setFavoriteLeague('Bundesliga')">
-        Voeg toe aan favorieten
-      </button>
+      <button class="add-favorite-btn">Voeg toe aan favorieten</button>
       <h4>Teams in Bundesliga:</h4>
       <ul class="team-list">
-        <li>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Ajax_logo.svg" alt="Bayern Munich" />
+        <li><img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Ajax_logo.svg" />
           <p>B</p>
         </li>
-        <li>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/47/FC_Barcelona_logo_2019.svg"
-            alt="Borussia Dortmund" />
+        <li><img src="https://upload.wikimedia.org/wikipedia/commons/4/47/FC_Barcelona_logo_2019.svg" />
           <p>B</p>
         </li>
-        <li>
-          <img src="" alt="RB Leipzig" />
+        <li><img src="" />
           <p>RB</p>
         </li>
       </ul>
@@ -95,51 +79,6 @@
 
   <h3>Favoriete Leagues</h3>
   <ul id="favoriteLeaguesList"></ul>
-
-  <br /><br />
-
-  <script>
-    function setFavoriteLeague(leagueName) {
-      let favoriteLeagues =
-        JSON.parse(localStorage.getItem('favoriteLeagues')) || [];
-
-      if (!favoriteLeagues.includes(leagueName)) {
-        favoriteLeagues.push(leagueName);
-        localStorage.setItem(
-          'favoriteLeagues',
-          JSON.stringify(favoriteLeagues)
-        );
-        loadFavoriteLeagues();
-      }
-    }
-
-    function loadFavoriteLeagues() {
-      let favoriteLeagues =
-        JSON.parse(localStorage.getItem('favoriteLeagues')) || [];
-      document.getElementById('favoriteLeaguesList').innerHTML =
-        favoriteLeagues
-          .map(
-            (league) =>
-              `<li>${league} <button onclick="removeFavoriteLeague('${league}')">Verwijder</button></li>`
-          )
-          .join('');
-    }
-
-    function removeFavoriteLeague(leagueName) {
-      let favoriteLeagues =
-        JSON.parse(localStorage.getItem('favoriteLeagues')) || [];
-      favoriteLeagues = favoriteLeagues.filter(
-        (league) => league !== leagueName
-      );
-      localStorage.setItem(
-        'favoriteLeagues',
-        JSON.stringify(favoriteLeagues)
-      );
-      loadFavoriteLeagues();
-    }
-
-    window.onload = loadFavoriteLeagues;
-  </script>
 </body>
 
 </html>
