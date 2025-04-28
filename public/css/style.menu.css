@@ -1,0 +1,186 @@
+* {
+  font-family: arial;
+}
+body {
+  background-image: url('../Assets/menu-background.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 90vh;
+  width: 100vw;
+  overflow: hidden;
+  min-height: 130vh;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.link_FAQ {
+  position: relative;
+  right: 100px;
+  color: black;
+  background-color: white;
+  text-align: center;
+  padding: 0px 15px;
+  height: 50px;
+  align-items: center;
+  display: flex;
+  border-radius: 10px;
+  font-weight: bold;
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+.icon-logout {
+  font-size: 30px;
+  color: white;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+.logo {
+  margin: 10px;
+}
+.logoEA {
+  width: 70px;
+  height: 70px;
+}
+.ondertitel {
+  font-size: 14px;
+  color: white;
+  margin-top: 15px;
+  margin-left: 10px;
+}
+.spelen_link {
+  text-decoration: none;
+}
+.card-spelen {
+  height: 220px;
+  width: 550px;
+  background-image: url('../Assets/spelen-foto.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 40px;
+  transition: transform 0.3s ease;
+}
+.container {
+  zoom: 150%;
+}
+.card-spelen:hover {
+  transform: scale(1.05);
+}
+.Spelen {
+  font-size: 35px;
+  color: white;
+  padding-top: 15px;
+  margin-left: 10px;
+}
+.card {
+  height: 120px;
+  width: 140px;
+  opacity: 0.7;
+  background-color: white;
+  border-radius: 4%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 15px;
+  transition: transform 0.3s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+.icon {
+  margin-bottom: 35px;
+}
+.blacklist {
+  height: 50px;
+  width: 50px;
+  margin-top: 15px;
+  margin-left: 25px;
+}
+.card-titel {
+  font-size: 16px;
+  text-align: center;
+}
+.row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  margin-left: 50px;
+}
+.blacklist {
+  margin-right: 15px;
+  margin-bottom: 50px;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 10%;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 300px;
+}
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  text-align: center;
+}
+.annuleren,
+.uitloggen {
+  padding: 10px;
+  margin: 5px;
+  background-color: #003b79;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.uitloggen {
+  background-color: rgb(222, 6, 6);
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+.link-kleine-cards {
+  color: black;
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .header {
+    flex-direction: row;
+    gap: 50px;
+  }
+  .card-spelen {
+    height: 180px;
+    width: 95%;
+    margin-top: 80px;
+    margin-left: auto;
+    margin-right: 5%;
+  }
+  .Spelen {
+    font-size: 24px;
+  }
+  .row {
+    flex-direction: column;
+    align-items: center;
+    margin-left: 5px;
+    margin-right: 10px;
+  }
+  body {
+    overflow: scroll;
+  }
+  .container {
+    zoom: 100%;
+  }
+}
