@@ -1,79 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="CSS/style.menu.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-  </head>
-  <body>
-    <div class="header">
-      <div class="logo">
-        <img src="Assets/Logo.png" alt="" /><img
-          src="Assets/logo.webp"
-          alt=""
-          class="logoEA"
-        />
-      </div>
-      <a href="javascript:void(0)" onclick="showPopup()">
-        <i
-          class="fa-solid fa-right-from-bracket icon-logout"
-          style="color: #ffffff"
-        ></i>
-      </a>
-      <a class="link_FAQ" href="Veelgesteldevragen.html">Veelgestelde vragen</a>
-      <div id="popup" class="popup">
-        <div class="popup-content">
-          <p>Weet je zeker dat je wilt uitloggen?</p>
-          <button class="uitloggen" onclick="loguit()">Uitloggen</button>
-          <button class="annuleren" onclick="closePopup()">Annuleren</button>
-        </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="CSS/style.menu.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+
+<body>
+  <div class="header">
+    <div class="logo">
+      <img src="Assets/Logo.png" alt="" /><img src="Assets/logo.webp" alt="" class="logoEA" />
+    </div>
+    <a href="javascript:void(0)" onclick="showPopup()">
+      <i class="fa-solid fa-right-from-bracket icon-logout" style="color: #ffffff"></i>
+    </a>
+    <a class="link_FAQ" href="/veelgesteldevragen">Veelgestelde vragen</a>
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <p>Weet je zeker dat je wilt uitloggen?</p>
+        <button class="uitloggen" onclick="loguit()">Uitloggen</button>
+        <button class="annuleren" onclick="closePopup()">Annuleren</button>
       </div>
     </div>
-    <div class="container">
-      <a class="spelen_link" href="quizpage.html">
-        <div class="card-spelen">
-          <div class="Spelen">Spelen</div>
-          <div class="ondertitel">
-            Ken jij alle voetbalclubs? Speel de quiz en bewijs het!
-          </div>
+  </div>
+  <div class="container">
+    <a class="spelen_link" href="quizpage.html">
+      <div class="card-spelen">
+        <div class="Spelen">Spelen</div>
+        <div class="ondertitel">
+          Ken jij alle voetbalclubs? Speel de quiz en bewijs het!
+        </div>
+      </div>
+    </a>
+    <div class="row">
+      <a href="FavorieteClub.html" class="link-kleine-cards">
+        <div class="card fav_club">
+          <h5 class="card-title">Favoriete Club(s)</h5>
+          <img src="Assets/football-club.png" alt="" class="icon club" />
         </div>
       </a>
-      <div class="row">
-        <a href="FavorieteClub.html" class="link-kleine-cards">
-          <div class="card fav_club">
-            <h5 class="card-title">Favoriete Club(s)</h5>
-            <img src="Assets/football-club.png" alt="" class="icon club" />
-          </div>
-        </a>
-        <a href="favoriete-league.html" class="link-kleine-cards">
-          <div class="card fav_league">
-            <h5 class="card-title">Favoriete league(s)</h5>
-            <img src="Assets/league.png" alt="" class="icon league" />
-          </div>
-        </a>
-        <a href="Blacklistpage.html" class="link-kleine-cards">
-          <div class="card blacklist_card">
-            <h5 class="card-title">Blacklist</h5>
-            <img src="Assets/blacklist.png" alt="" class="icon blacklist" />
-          </div>
-        </a>
-      </div>
+      <a href="favoriete-league.html" class="link-kleine-cards">
+        <div class="card fav_league">
+          <h5 class="card-title">Favoriete league(s)</h5>
+          <img src="Assets/league.png" alt="" class="icon league" />
+        </div>
+      </a>
+      <a href="Blacklistpage.html" class="link-kleine-cards">
+        <div class="card blacklist_card">
+          <h5 class="card-title">Blacklist</h5>
+          <img src="Assets/blacklist.png" alt="" class="icon blacklist" />
+        </div>
+      </a>
     </div>
-  </body>
-  <script>
-    function showPopup() {
-      document.getElementById('popup').style.display = 'block';
-    }
-    function closePopup() {
-      document.getElementById('popup').style.display = 'none';
-    }
-    function loguit() {
-      window.location.href = 'InlogPagina.html';
-    }
-  </script>
+  </div>
+</body>
+<script>
+  function showPopup() {
+    document.getElementById('popup').style.display = 'block';
+  }
+  function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+  }
+  function loguit() {
+    window.location.href = 'InlogPagina.html';
+  }
+</script>
+
 </html>
