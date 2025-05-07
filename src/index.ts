@@ -10,6 +10,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "../views"));
 
 app.use(express.static(path.join(__dirname, "../public")));
+
 app.use("/Javascript", express.static(path.join(__dirname, "../Javascript")));
 app.use("/CSS", express.static(path.join(__dirname, "../CSS")));
 app.use("/Assets", express.static(path.join(__dirname, "../Assets")));
@@ -42,6 +43,10 @@ const clubLogos: { [key: string]: string } = {
   Ajax: "https://upload.wikimedia.org/wikipedia/en/7/79/Ajax_Amsterdam.svg",
   "Leicester City": "/assets/clubs/leicester.png",
   "FC Barcelona": "/assets/clubs/fcbarca.png",
+  "Atletico Madrid":"/assets/clubs/atleticomadrid.png",
+  Besiktas: "/assets/clubs/besiktas.png",
+  Galatasaray: "/assets/clubs/galatasaray.png",
+  Fenerbahce: "/assets/clubs/fenerbahce.png",
 
   // 🇩🇪 Duitsland
   "M'gladbach": "https://upload.wikimedia.org/wikipedia/commons/8/81/Borussia_M%C3%B6nchengladbach_logo.svg",
@@ -286,7 +291,7 @@ app.get("/registratie", (req, res) => {
 
 app.get("/menu", (req, res) => {
   res.render("Menupagina", { title: "Menu" });
-});
+}); 
 
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
@@ -296,6 +301,7 @@ app.post("/login", (req, res) => {
     res.redirect("/inlog");
   }
 });
+
 
 app.get("/veelgesteldevragen", (req, res) => {
   res.render("Veelgesteldevragen", { title: "Veelgestelde Vragen" });

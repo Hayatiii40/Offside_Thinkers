@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
         alert('Vul alle velden in!');
       } else {
         alert('Succesvol ingelogd!');
-        window.location.href = 'Menupagina.html'; // Verwijs door na login
+        window.location.href = '/menu'; // Verwijs door na login 
       }
     });
 });
