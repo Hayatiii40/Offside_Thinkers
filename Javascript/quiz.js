@@ -1,19 +1,15 @@
 let timeLeft = 60;
 console.log("Test TEST")
 const timerElement = document.getElementById("timer");
+const scoreElement = document.querySelector(".al");
 timerElement.style.color = "white";
 timerElement.style.fontSize = "1.8rem";
 timerElement.style.marginRight = "1rem";
 
-document.querySelectorAll(".option").forEach(option => {
-  option.addEventListener("click", () => {
-    if (option.dataset.correct === "true") {
-      option.style.backgroundColor = "green";
-    } else {
-      option.style.backgroundColor = "red";
-    }
-  });
-});
+let scoreTeller = 0
+
+
+
 
 const countdown = setInterval(() => {
   timeLeft--;
@@ -37,6 +33,8 @@ async function loadNewQuiz() {
 
   const data = await res.json();
 
+  console.log("Quiz data:", data);
+
   const logoImg = document.querySelector(".team-logo");
 logoImg.src = data.logoUrl;  // Zorg dat dit goed staat
 
@@ -56,12 +54,21 @@ logoImg.src = data.logoUrl;  // Zorg dat dit goed staat
     div.addEventListener("click", () => {
       if (div.dataset.correct === "true") {
         div.style.backgroundColor = "green";
-        div.style.border = "none"
+        div.style.border = "none"        
+        scoreTeller = scoreTeller + 30;
+        scoreElement.textContent = scoreTeller;
         setTimeout(() => {
           loadNewQuiz(); // laad nieuwe vraag
-        }, 1000);
+        }, 500);
       } else {
         div.style.backgroundColor = "red";
+        if(scoreTeller <= 0){
+          scoreElement.textContent = 0;
+        }
+        else{
+          scoreTeller = scoreTeller - 30;
+          scoreElement.textContent = scoreTeller;
+        }
       }
     });
 
