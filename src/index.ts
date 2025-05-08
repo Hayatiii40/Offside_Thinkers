@@ -354,6 +354,10 @@ app.post("/login", (req, res) => {
   }
 });
 
+app.get("/skysoccer", (req,res)=>{
+  res.render("Jumpgame",{title:"SkySoccer"})
+})
+
 
 app.get("/veelgesteldevragen", (req, res) => {
   res.render("Veelgesteldevragen", { title: "Veelgestelde Vragen" });
@@ -424,6 +428,8 @@ app.get("/api/quiz", async (req: Request, res: Response) => {
 //     res.status(500).json({ error: "Er ging iets mis bij het laden van de quiz." });
 //   }
 // });
+
+
 
 // ✅ Start server
 app.listen(PORT, () => {

@@ -83,7 +83,7 @@ async function loadNewQuiz() {
           scoreTeller -= 30;
         }
         scoreElement.textContent = scoreTeller;
-        endGame("❌ Verkeerd antwoord!");
+        endGame("❌ Game over!");
       }
     });
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,7 +9,8 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #000000; /* Grass field */
+      background: rgb(143, 143, 143);
+      /* Grass field */
       background-size: cover;
       background-position: center;
       color: white;
@@ -56,6 +58,7 @@
     }
   </style>
 </head>
+
 <body>
   <h1>⚽ Football Juggler</h1>
   <p>Click the football to keep it up!</p>
@@ -82,8 +85,8 @@
       dy: 0,
     };
 
-    const gravity = 0.13;
-    const bouncePower = -7;
+    const gravity = 0.25;
+    const bouncePower = -10;
     const sidePush = 3;
 
     let score = 0;
@@ -164,4 +167,5 @@
     football.onload = update;
   </script>
 </body>
+
 </html>
