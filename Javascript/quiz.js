@@ -4,17 +4,27 @@ let scoreTeller = 0;
 
 const timerElement = document.getElementById("timer");
 const scoreElement = document.querySelector(".al");
+const quizcontainer = document.querySelector(".quiz-container");
+const quizhead = document.querySelector(".quiz-head");
 timerElement.style.color = "white";
 timerElement.style.fontSize = "1.8rem";
 timerElement.style.marginRight = "1rem";
+scoreElement.style.fontSize = "30px"
+
 
 function startTimer() {
-  clearInterval(countdown); // Reset vorige timer
+  clearInterval(countdown);
   timeLeft = 10;
   timerElement.style.color = "white";
   timerElement.style.fontWeight = "normal";
-  timerElement.style.fontSize = "1.8rem";
+  timerElement.style.fontSize = "30px";
   timerElement.textContent = `⏱ ${timeLeft}s`;
+
+  // Reset animatiekleur naar blauw bij nieuwe vraag
+  quizcontainer.classList.remove("red-glow");
+  quizcontainer.classList.add("blue-glow");
+  // quizhead.classList.remove("red-glow");
+  // quizhead.classList.add("blue-glow");
 
   countdown = setInterval(() => {
     timeLeft--;
@@ -22,6 +32,12 @@ function startTimer() {
 
     if (timeLeft <= 5) {
       timerElement.style.color = "red";
+
+      quizcontainer.classList.remove("blue-glow");
+      quizcontainer.classList.add("red-glow");
+
+      // quizhead.classList.remove("blue-glow");
+      // quizhead.classList.add("red-glow");
     }
 
     if (timeLeft <= 0) {
@@ -30,6 +46,8 @@ function startTimer() {
     }
   }, 1000);
 }
+
+
 
 function endGame(message) {
   clearInterval(countdown);
@@ -68,6 +86,8 @@ async function loadNewQuiz() {
     div.addEventListener("click", () => {
       clearInterval(countdown); // Stop de timer bij een klik
 
+      const allOptions = document.querySelectorAll(".option");
+
       if (div.dataset.correct === "true") {
         div.style.backgroundColor = "green";
         div.style.border = "none";
@@ -79,16 +99,34 @@ async function loadNewQuiz() {
         }, 500);
       } else {
         div.style.backgroundColor = "red";
+        quizcontainer.classList.remove("blue-glow");
+        quizcontainer.classList.add("red-glow");
+
+        // ✅ Highlight het juiste antwoord in het groen
+        allOptions.forEach(optEl => {
+          if (optEl.dataset.correct === "true") {
+            optEl.style.backgroundColor = "blue";
+            optEl.style.color = "white";
+          }
+          // Opties disablen na fout antwoord
+          optEl.style.pointerEvents = "none";
+        });
+
         if (scoreTeller > 0) {
           scoreTeller -= 30;
         }
         scoreElement.textContent = scoreTeller;
-        endGame("❌ Game over!");
+
+        // ❌ Toon foutmelding na korte vertraging
+        setTimeout(() => {
+          endGame("❌ Fout!");
+        }, 800);
       }
     });
 
     optionsContainer.appendChild(div);
   });
 }
+
 
 loadNewQuiz();

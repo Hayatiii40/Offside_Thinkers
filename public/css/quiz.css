@@ -10,20 +10,26 @@ body {
   font-family: Arial, sans-serif;
   background-color: #34495e;
 }
-.gamepage{
+
+.gamepage {
   height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .navbar img {
   width: 150px;
+}
+
+#eaLogo {
+  width: 50px;
 }
 
 .navbar ul li a {
   color: white;
   text-decoration: none;
-  font-size: 16px;
+
 }
 
 #burger-bar {
@@ -38,43 +44,76 @@ body {
   margin: 1rem 20rem;
   padding: 0.8rem 1.5rem;
   background: rgba(0, 0, 0, 0.5);
-  border: 2px solid #4133ff;
+  border: 2px solid #797979;
   border-radius: 12px;
-  box-shadow: 0 0 10px #4133ff, 0 0 20px #4133ff;
+  box-shadow: 0 0 10px #ffffff, 0 0 20px #a4a4a4;
   backdrop-filter: blur(6px);
-  font-size: 20px;
+
+  width: 400px;
 }
-.quiz-container{
+
+.quiz-container {
   background-color: #abd7ebbb;
   margin: 0 20rem;
   padding-bottom: 3rem;
   border: 2px solid #4133ff;
-  animation: neonGlow 2s infinite ease-in-out;
   box-shadow: 0 0 8px #4133ff, 0 0 16px #4133ff, 0 0 24px #4133ff;
   border-radius: 20px;
 }
+
+.blue-glow {
+  animation: neonGlow 2s infinite ease-in-out;
+  box-shadow: 0 0 8px #4133ff, 0 0 16px #4133ff, 0 0 24px #4133ff;
+  border: 2px solid #4133ff;
+}
+
+.red-glow {
+  animation: neonGlowRed 2s infinite ease-in-out;
+  box-shadow: 0 0 8px red, 0 0 16px red, 0 0 24px red;
+  border: 2px solid red;
+}
+
+
 @keyframes neonGlow {
   0% {
     box-shadow: 0 0 5px #4133ff, 0 0 10px #4133ff, 0 0 20px #4133ff, 0 0 30px #4133ff;
   }
+
   50% {
     box-shadow: 0 0 10px #4133ff, 0 0 30px #4133ff, 0 0 40px #4133ff, 0 0 50px #4133ff;
   }
+
   100% {
     box-shadow: 0 0 5px #4133ff, 0 0 10px #4133ff, 0 0 20px #4133ff, 0 0 30px #4133ff;
   }
 }
+
+@keyframes neonGlowRed {
+  0% {
+    box-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+  }
+
+  50% {
+    box-shadow: 0 0 10px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000;
+  }
+
+  100% {
+    box-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+  }
+}
+
 .quiz-head .al,
 .quiz-head #timer {
   background: none;
-  
+
   font-weight: bold;
   margin: 0;
   padding: 0 10px;
   font-size: 1.3rem;
 }
+
 .quiz-head .al {
-  color: rgb(255, 174, 0);
+  color: #ffae00;
   text-shadow: 0px 0px 3px #e9c38a;
   font-size: 1.7rem;
   position: relative;
@@ -89,7 +128,7 @@ body {
   left: -75%;
   width: 50%;
   height: 100%;
-  background: linear-gradient(120deg, rgba(255, 255, 255, 0.3) 0%, rgba(255,255,255,0.8) 50%, rgba(255, 255, 255, 0.3) 100%);
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0.3) 100%);
   transform: skewX(-20deg);
   /* animation: shine 2.5s infinite ease-in-out; */
 }
@@ -98,16 +137,18 @@ body {
   0% {
     left: -75%;
   }
+
   80% {
     left: 100%;
   }
+
   100% {
     left: 100%;
   }
 }
 
 #timer.flash-shake {
-  
+
   color: red;
   font-weight: bold;
 }
@@ -120,9 +161,9 @@ body {
   border-radius: 10px;
   padding: 10px;
   margin: 10px auto;
-  
-  
-  
+
+
+
 }
 
 .question {
@@ -146,7 +187,7 @@ body {
   max-width: 800px;
   margin: 10px auto;
   font-weight: 600;
-  
+
 }
 
 .option {
@@ -160,21 +201,24 @@ body {
 }
 
 .option:hover {
-  border:none;
+  border: none;
   color: white;
-  animation: neonGlow2 0.2s 1 ease-in-out forwards,background-color 1s 1 ease-in-out forwards;;
+  animation: neonGlow2 0.2s 1 ease-in-out forwards, background-color 1s 1 ease-in-out forwards;
+  ;
   /* animation: name duration timing-function delay iteration-count direction fill-mode; */
 }
+
 @keyframes neonGlow2 {
   0% {
     box-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
     background: white;
   }
+
   100% {
     box-shadow: 0 0 10px #4133ff, 0 0 15px #4133ff;
     background-color: #4133ff;
   }
-  
+
 }
 
 .container-1 {
@@ -183,15 +227,17 @@ body {
   align-items: center;
   margin: 0px auto;
 }
+
 .tips-button {
   background: rgba(255, 255, 255, 0);
   padding: 5px;
-  font-size: 1.5rem;
+  font-size: 2rem;
   border-radius: 50%;
   /* box-shadow: 0 0 6px #ffae00; */
-  transition: transform 0.3s ease,text-shadow 0.3s ease;
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
 }
-.tips-button:hover{
+
+.tips-button:hover {
   transform: scale(1.1);
   text-shadow: 0 0 25px #ffae00;
 }
@@ -201,54 +247,125 @@ body {
   background: rgba(255, 255, 255, 0.5);
   border-radius: 100%;
 }
+
 @media (max-width: 1068px) {
+
+  html {
+    overflow-x: hidden;
+  }
+
+
+
+  .quiz-head {
+    width: 450px;
+  }
+
+  .quiz-container {
+    margin-top: 2rem;
+
+  }
+
   .navbar img {
     width: 100px;
   }
+
   .al,
   #timer {
     font-size: 20px;
   }
+
   .team-logo {
-    width: 200px;
-    height: 100px;
+    /* width: 200px;
+    height: 150px; */
+    height: 250px;
   }
+
   .question {
     font-size: 22px;
     padding: 15px;
   }
+
   .options {
-    grid-template-columns: 290px;
+    grid-template-columns: 1fr;
     gap: 10px;
     justify-content: center;
+    align-items: center;
   }
+
   .option {
     font-size: 18px;
-    padding: 10px;
+    padding: 12px;
+
   }
 }
 
-@media (max-width: 480px) {
-  .navbar img {
-    width: 50px;
+@media (max-width: 680px) {
+  .quiz-head {
+    margin: 1rem;
+
+    flex-direction: column;
+    padding: 1rem;
   }
-  #timer {
-    font-size: 18px;
+
+  .quiz-container {
+    /* margin-top: 8rem; */
+    margin: 1rem;
+    padding: 1rem;
   }
-  .team-logo {
-    width: 40px;
-    height: 40px;
+
+  .options {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
-  .question {
-    font-size: 18px;
-    padding: 10px;
-  }
+
   .option {
-    font-size: 16px;
-    padding: 8px;
+    width: 100%;
+    font-size: 18px;
+    padding: 12px;
+    box-sizing: border-box;
   }
+
+  .team-logo {
+    height: 150px;
+    max-width: 100%;
+  }
+
+  .navbar img {
+    width: 80px;
+  }
+
   #burger-bar {
-    display: static;
-    width: 50px;
+    display: block;
   }
+
+  .quiz-head .al,
+  .quiz-head #timer {
+    font-size: 1.2rem;
+  }
+
+  .tips-button {
+    font-size: 1.5rem;
+  }
+
+  .tips-foto {
+    width: 40px;
+  }
+}
+
+@media (max-width:478px) {
+  main {
+    padding: 9rem 2rem 2rem 2rem;
+  }
+
+  .quiz-head {
+    width: 300px;
+    font-size: 10px;
+
+  }
+
+  .options {
+    gap: 5px;
+  }
+
+
 }

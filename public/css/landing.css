@@ -107,7 +107,7 @@ button {
     margin-left: 1rem;
     color: rgb(192, 192, 192);
     font-weight: 600;
-
+    border: 1px solid white;
 }
 
 #warning {
