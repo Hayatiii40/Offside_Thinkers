@@ -1,9 +1,15 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import path from "path";
+import {Db, MongoClient,ObjectId} from "mongodb";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const uri = "mongodb+srv://Dzhaner:12345678Dzhaner@cluster0.pa8gmws.mongodb.net/";
+const client = new MongoClient(uri);
+let database: Db
+const api_token = "1844727b6fd7406bbcae874d539f5dc2";
+
 
 app.use(cors());
 app.set("view engine", "ejs");
@@ -18,6 +24,20 @@ app.use("/assets", express.static(path.join(__dirname, "../Assets")));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+async function main() {
+    try {
+        // Connect to the MongoDB cluster
+        await client.connect();
+        console.log("geconnecteerd mongo")
+        database = client.db("database1")
+ 
+    } catch (e) {
+        console.error(e);
+    } 
+}
+
+main();
 
 // 🔄 Logo- en aliasgegevens
 const clubLogos: { [key: string]: string } = {
@@ -99,6 +119,8 @@ const clubLogos: { [key: string]: string } = {
   "Standard Liège" : "assets/clubs/standardliege.png",
   "Sporting Charleroi" : "assets/clubs/charleroi.png",
   "FC Copenhagen" : "assets/clubs/copenhagen.png",
+  "FC Inhulets Petrove" : "assets/clubs/inhulets.png",
+  "Dynamo Kyiv" : "assets/clubs/kiev.png",
 
   // 🇩🇪 Duitsland
   "M'gladbach": "https://upload.wikimedia.org/wikipedia/commons/8/81/Borussia_M%C3%B6nchengladbach_logo.svg",
@@ -112,6 +134,8 @@ const clubLogos: { [key: string]: string } = {
   "FC Schalke 04": "/assets/clubs/schalke.png",
   "VfB Stuttgart": "/assets/clubs/stuttgart.png",
   "SV Werder Bremen": "/assets/clubs/werderbremen.png",
+  "FC Nurnberg" : "/assets/clubs/nurnberg.png",
+  "SpVgg Greuther Fürth": "/assets/clubs/greuther.png",
 
   // 🇮🇹 Italië
   Inter: "/assets/clubs/inter.png",
@@ -217,15 +241,46 @@ const aliases: { [key: string]: string } = {
 };
 
 
-interface Club {
-  id: number;
-  name: string;
-  league: number | null;
-}
+// interface Club {
+//   id: number;
+//   name: string;
+//   league: number | null;
+// }
 
 interface ClubsResponse {
   pagination: any;
   items: Club[];
+}
+
+export interface Club {
+  _id?: ObjectId;
+  id: number;
+  name: string;
+  shortName: string;
+  tla: string;
+  crest: string;
+  address: string;
+  website: string;
+  founded: number;
+  clubColors: string;
+  venue: string;
+  lastUpdated: string;
+}
+export interface League {
+  _id?: ObjectId;
+  id: number;
+  area: {
+    name: string;
+    code: string;
+  };
+  name: string;
+  code: string;
+  type: string;
+  emblem: string;
+  plan: string;
+  currentSeason: any;
+  numberOfAvailableSeasons: number;
+  lastUpdated: string;
 }
 
 function getRandomInt(max: number) {

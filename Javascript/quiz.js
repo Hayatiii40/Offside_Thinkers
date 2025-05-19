@@ -102,7 +102,7 @@ async function loadNewQuiz() {
         quizcontainer.classList.remove("blue-glow");
         quizcontainer.classList.add("red-glow");
 
-        // ✅ Highlight het juiste antwoord in het groen
+        
         allOptions.forEach(optEl => {
           if (optEl.dataset.correct === "true") {
             optEl.style.backgroundColor = "blue";
@@ -112,9 +112,7 @@ async function loadNewQuiz() {
           optEl.style.pointerEvents = "none";
         });
 
-        if (scoreTeller > 0) {
-          scoreTeller -= 30;
-        }
+        
         scoreElement.textContent = scoreTeller;
 
         // ❌ Toon foutmelding na korte vertraging
