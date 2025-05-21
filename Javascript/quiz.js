@@ -42,7 +42,7 @@ function startTimer() {
 
     if (timeLeft <= 0) {
       clearInterval(countdown);
-      endGame("⏱ Tijd is op!");
+      endGame("⏱ Tijd is om!");
     }
   }, 1000);
 }

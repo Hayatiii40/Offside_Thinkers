@@ -25,6 +25,7 @@ app.use("/assets", express.static(path.join(__dirname, "../Assets")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+
 async function main() {
     try {
         // Connect to the MongoDB cluster
@@ -38,6 +39,8 @@ async function main() {
 }
 
 main();
+
+
 
 // 🔄 Logo- en aliasgegevens
 const clubLogos: { [key: string]: string } = {
@@ -252,6 +255,14 @@ interface ClubsResponse {
   items: Club[];
 }
 
+export interface Player {
+  id: number;
+  name: string;
+  position: string;
+  nationality: string;
+  shirtNumber?: number;
+}
+
 export interface Club {
   _id?: ObjectId;
   id: number;
@@ -265,6 +276,7 @@ export interface Club {
   clubColors: string;
   venue: string;
   lastUpdated: string;
+  squad?: Player[]; 
 }
 export interface League {
   _id?: ObjectId;
@@ -297,8 +309,6 @@ function getShuffledOptions(correct: string, allNames: string[]): string[] {
   return Array.from(options).sort(() => 0.5 - Math.random());
 }
 
-
-// 🆕 Functie om meerdere pagina’s op te halen
 async function fetchAllClubPages(pages: number): Promise<Club[]> {
   const headers = {
     Accept: "application/json",
@@ -319,69 +329,6 @@ async function fetchAllClubPages(pages: number): Promise<Club[]> {
   console.log(allClubs)
   return allClubs;
 }
-
-
-// Voorbeeldlijst van teamnamen die je gebruikt in je quiz (of haal uit API)
-const allTeams: string[] = [
-  "Manchester Utd",
-  "Real Madrid",
-  "PSG",
-  "FC Bayern München",
-  "Spurs",
-  "QPR",
-  "Ajax",
-  "Borussia Mönchengladbach",
-  "Newcastle Utd",
-  "Nottingham Forest",
-  "Leicester City",
-  "Unknown Team" // test
-];
-
-const missingLogos: string[] = [];
-
-for (const team of allTeams) {
-  const actualName = aliases[team] || team;
-  const logo = clubLogos[actualName];
-
-  if (!logo) {
-    missingLogos.push(`${team} → ${actualName}`);
-  }
-}
-
-if (missingLogos.length === 0) {
-  console.log("✅ Alle teamnamen hebben een bijbehorend logo.");
-} else {
-  console.log("❌ De volgende teams hebben geen matchend logo:");
-  for (const team of missingLogos) {
-    console.log(" -", team);
-  }
-}
-import axios from "axios";
-
-
-async function checkLogos() {
-  const broken: string[] = [];
-
-  for (const [team, url] of Object.entries(clubLogos)) {
-    try {
-      const response = await axios.head(url); // alleen headers
-      if (response.status !== 200) {
-        console.log(`❌ ${team} → ${url} [status: ${response.status}]`);
-        broken.push(team);
-      } else {
-        console.log(`✅ ${team}`);
-      }
-    } catch (error) {
-      console.log(`❌ ${team} → ${url} [GEEN toegang]`);
-      broken.push(team);
-    }
-  }
-
-  console.log("\nKAPOTTE LOGO'S:");
-  console.log(broken.length ? broken.join(", ") : "Alles werkt 🎉");
-}
-
-checkLogos();
 
 // ✅ ROUTES
 app.get("/", (req, res) => {
@@ -421,6 +368,42 @@ app.get("/veelgesteldevragen", (req, res) => {
 app.get("/soccersky", (req, res) => {
   res.render("JumpGame", { title: "Soccer Sky" });
 });
+
+app.get("/clubdetails/:id", async (req: express.Request, res: express.Response) => {
+  try {
+    const clubId = req.params.id;
+    let club;
+
+    if (!isNaN(Number(clubId))) {
+      club = await database.collection("teams").findOne({ id: Number(clubId) });
+    } else {
+      club = await database.collection("teams").findOne({ _id: new ObjectId(clubId) });
+    }
+
+    if (!club) {
+      res.status(404).send("Club not found");
+      return;
+    }
+
+    // Voorbeeld squad data - vervang dit met echte data uit je database
+    club.squad = club.squad || [
+      { id: 1, name: "John Doe", position: "Forward", nationality: "England", shirtNumber: 9 },
+      { id: 2, name: "Mike Smith", position: "Midfielder", nationality: "Spain", shirtNumber: 8 },
+      // ... meer spelers ...
+    ];
+
+    res.render("ClubDetail", { 
+      title: club.name, 
+      club 
+    });
+  } catch (error) {
+    console.error("Error fetching club details:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
+
 
 // ✅ QUIZ pagina
 app.get("/quiz", async (req: Request, res: Response) => {
@@ -467,22 +450,6 @@ app.get("/api/quiz", async (req: Request, res: Response) => {
   }
 });
 
-// app.get("/api/quiz", async (req: Request, res: Response) => {
-//   try {
-//     const allClubNames = Object.keys(clubLogos);
-//     const correctName = allClubNames[getRandomInt(allClubNames.length)];
-//     const options = getShuffledOptions(correctName, allClubNames);
-
-//     res.json({
-//       logoUrl: clubLogos[correctName],
-//       correctAnswer: correctName,
-//       options,
-//     });
-//   } catch (error) {
-//     console.error("Fout bij quiz genereren:", error);
-//     res.status(500).json({ error: "Er ging iets mis bij het laden van de quiz." });
-//   }
-// });
 
 
 

@@ -10,6 +10,7 @@
 </head>
 
 <body>
+  <audio src="Assets/muziek1.mp3" autoplay muted></audio>
   <div class="header">
     <div class="logo">
       <img src="Assets/Logo.png" alt="" /><img src="Assets/logo.webp" alt="" class="logoEA" />
@@ -17,9 +18,9 @@
     <a href="javascript:void(0)" onclick="showPopup()">
       <i class="fa-solid fa-right-from-bracket icon-logout" style="color: #ffffff"></i>
     </a>
-    <a class="link_FAQ" href="/veelgesteldevragen">Veelgestelde vragen</a>
-    <div id="popup" class="popup">
-      <div class="popup-content">
+    <a class="link_FAQ" href="Veelgesteldevragen.html">Veelgestelde vragen</a>
+    <div id="popup-log" class="popup-log">
+      <div class="popup-content-log">
         <p>Weet je zeker dat je wilt uitloggen?</p>
         <button class="uitloggen" onclick="loguit()">Uitloggen</button>
         <button class="annuleren" onclick="closePopup()">Annuleren</button>
@@ -27,46 +28,122 @@
     </div>
   </div>
   <div class="container">
-    <a class="spelen_link" href="/quiz">
+    <div class="spelen_link" id="spelenButton">
       <div class="card-spelen">
         <div class="Spelen">Spelen</div>
         <div class="ondertitel">
           Ken jij alle voetbalclubs? Speel de quiz en bewijs het!
         </div>
       </div>
-    </a>
+    </div>
+    <div id="keuzePopup" class="popup">
+      <div class="popup-content">
+        <h2>Kies een spel</h2>
+        <div class="games">
+          <div class="game" onclick="startQuiz()">
+            <img
+              src="https://lh3.googleusercontent.com/L2u51vUTht_m3dGRX-kkusg-GY9NO4AEsgO4zBQ0TGAVdz6vQX7byQTDCoHuu_ja5HjJ"
+              alt="Voetbal Quiz">
+            <p>Voetbal Quiz</p>
+          </div>
+          <div class="game" onclick="startAnderSpel()">
+            <img src="../assets/skysoccer.png" alt="Ander Spel">
+            <p>Sky Soccer</p>
+          </div>
+        </div>
+        <button class="annuleer-knop" onclick="sluitPopup()">Annuleren</button>
+      </div>
+    </div>
+
+
     <div class="row">
-      <a href="FavorieteClub.ejs" class="link-kleine-cards">
-        <div class="card fav_club">
-          <h5 class="card-title">Favoriete Club(s)</h5>
-          <img src="Assets/football-club.png" alt="" class="icon club" />
+      <!--<a href="FavorieteClub.html" class="link-kleine-cards">
+          <div class="card fav_club">
+            <h5 class="card-title">Club(s)</h5>
+            <img src="Assets/football-club.png" alt="" class="icon club" />
+          </div>
+        </a>
+        <a href="favoriete-league.html" class="link-kleine-cards">
+          <div class="card fav_league">
+            <h5 class="card-title">league(s)</h5>
+            <img src="Assets/league.png" alt="" class="icon league" />
+          </div>
+        </a>-->
+      <a href="Blacklistpage.html" class="link-kleine-cards">
+        <div class="card list_card">
+          <h5 class="card-title list_title">Club Manager</h5>
+          <img src="Assets/list.png" alt="" class="icon list" />
         </div>
       </a>
-      <a href="favoriete-league.ejs" class="link-kleine-cards">
-        <div class="card fav_league">
-          <h5 class="card-title">Favoriete league(s)</h5>
-          <img src="Assets/league.png" alt="" class="icon league" />
-        </div>
-      </a>
-      <a href="Blacklistpage.ejs" class="link-kleine-cards">
-        <div class="card blacklist_card">
-          <h5 class="card-title">Blacklist</h5>
-          <img src="Assets/blacklist.png" alt="" class="icon blacklist" />
-        </div>
-      </a>
+    </div>
+  </div>
+  <div class="leaderboard">
+    <h2>Leaderboard</h2>
+    <div class="leaderboard-item">
+      <span>1. Player Name</span>
+      <span>3050</span>
+    </div>
+    <div class="leaderboard-item">
+      <span>2. Player Name</span>
+      <span>2955</span>
+    </div>
+    <div class="leaderboard-item">
+      <span>3. Player Name</span>
+      <span>2649</span>
+    </div>
+    <div class="leaderboard-item">
+      <span>4. Player Name</span>
+      <span>2403</span>
+    </div>
+    <div class="leaderboard-item">
+      <span>5. Player Name</span>
+      <span>2396</span>
+    </div>
+    <div class="leaderboard-item">
+      <span>6. Player Name</span>
+      <span>2208</span>
+    </div>
+    <div class="leaderboard-item">
+      <span>7. Player Name</span>
+      <span>2000</span>
+    </div>
+    <div class="leaderboard-item">
+      <span>8. Player Name</span>
+      <span>1985</span>
+    </div>
+    <div class="leaderboard-item">
+      <span>9. Player Name</span>
+      <span>1805</span>
     </div>
   </div>
 </body>
 <script>
   function showPopup() {
-    document.getElementById('popup').style.display = 'block';
+    document.getElementById('popup-log').style.display = 'block';
   }
   function closePopup() {
-    document.getElementById('popup').style.display = 'none';
+    document.getElementById('popup-log').style.display = 'none';
   }
   function loguit() {
     window.location.href = 'InlogPagina.html';
   }
+
+
+  document.querySelector('.card-spelen').addEventListener('click', function () {
+    document.getElementById('keuzePopup').style.display = 'flex';
+  });
+
+  function startQuiz() {
+    window.location.href = "quizpage.ejs";
+  }
+  function startAnderSpel() {
+    window.location.href = "Jumpgame.ejs";
+  }
+  function sluitPopup() {
+    document.getElementById('keuzePopup').style.display = 'none';
+  }
+  muted = false
+
 </script>
 
 </html>
