@@ -1,6 +1,8 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import path from "path";
+import bcrypt from "bcrypt";
+import session from 'express-session';
 import {Db, MongoClient,ObjectId} from "mongodb";
 
 const app = express();
@@ -24,11 +26,17 @@ app.use("/assets", express.static(path.join(__dirname, "../Assets")));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(session({
+  secret: 'supergeheimeWPLsessie',
+  resave: false,
+  saveUninitialized: false,
+}));
+
 
 
 async function main() {
     try {
-        // Connect to the MongoDB cluster
+        
         await client.connect();
         console.log("geconnecteerd mongo")
         database = client.db("database1")
@@ -42,7 +50,7 @@ main();
 
 
 
-// 🔄 Logo- en aliasgegevens
+
 const clubLogos: { [key: string]: string } = {
   Arsenal: "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg",
   "Aston Villa": "/assets/clubs/astv.png",
@@ -244,11 +252,6 @@ const aliases: { [key: string]: string } = {
 };
 
 
-// interface Club {
-//   id: number;
-//   name: string;
-//   league: number | null;
-// }
 
 interface ClubsResponse {
   pagination: any;
@@ -309,6 +312,15 @@ function getShuffledOptions(correct: string, allNames: string[]): string[] {
   return Array.from(options).sort(() => 0.5 - Math.random());
 }
 
+function isAuthenticated(req: Request, res: Response, next: Function) {
+  if (req.session.user) {
+    next();
+  } else {
+    res.redirect("/inlog");
+  }
+}
+
+
 async function fetchAllClubPages(pages: number): Promise<Club[]> {
   const headers = {
     Accept: "application/json",
@@ -343,18 +355,90 @@ app.get("/registratie", (req, res) => {
   res.render("RegistratiePage", { title: "Registratie" });
 });
 
-app.get("/menu", (req, res) => {
-  res.render("Menupagina", { title: "Menu" });
-}); 
+app.get("/menu", isAuthenticated,(req, res) => {
+  res.render("Menupagina", { title: "Menu",user:req.session.user  });
+});   
 
-app.post("/login", (req, res) => {
+app.post("/login", async (req: Request, res: Response) => {
   const { username, password } = req.body;
-  if (username && password) {
+
+  if (!username || !password) {
+    return res.redirect("/inlog");
+  }
+
+  try {
+    const user = await database.collection("users").findOne({ username });
+
+    if (!user) {
+      return res.render("InlogPagina", { title: "Inloggen", error: "Gebruiker niet gevonden" });
+    }
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      return res.render("InlogPagina", { title: "Inloggen", error: "Wachtwoord incorrect" });
+    }
+
+    // Sessiegebruiker instellen
+    req.session.user = {
+      username: user.username,
+      role: user.role
+    };
+
     res.redirect("/menu");
-  } else {
-    res.redirect("/inlog");
+  } catch (err) {
+    console.error("Loginfout:", err);
+    res.status(500).render("error", { message: "Interne serverfout bij inloggen." });
   }
 });
+
+import "express-session";
+
+declare module "express-session" {
+  interface SessionData {
+    user?: {
+      username: string;
+      role: string;
+    };
+  }
+}
+
+
+app.post("/registratie", async (req: Request, res: Response) => {
+  const { username, password, ["confirm-password"]: confirmPassword } = req.body;
+
+  if (!username || !password || !confirmPassword) {
+    return res.status(400).render("RegistratiePage", { title: "Registratie", error: "Vul alle velden in." });
+  }
+
+  if (password !== confirmPassword) {
+    return res.status(400).render("RegistratiePage", { title: "Registratie", error: "Wachtwoorden komen niet overeen." });
+  }
+
+  try {
+    const usersCollection = database.collection("users");
+    const existingUser = await usersCollection.findOne({ username });
+
+    if (existingUser) {
+      return res.status(400).render("RegistratiePage", { title: "Registratie", error: "Gebruikersnaam is al bezet." });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await usersCollection.insertOne({
+      username,
+      password: hashedPassword,
+      role: "USER",
+      createdAt: new Date()
+    });
+
+    res.redirect("/inlog");
+  } catch (err) {
+    console.error("Fout bij registratie:", err);
+    res.status(500).render("error", { message: "Er is een fout opgetreden bij registratie." });
+  }
+});
+
 
 app.get("/skysoccer", (req,res)=>{
   res.render("Jumpgame",{title:"SkySoccer"})

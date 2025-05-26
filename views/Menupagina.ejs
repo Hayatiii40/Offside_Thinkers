@@ -11,6 +11,7 @@
 
 <body>
   <audio src="Assets/muziek1.mp3" autoplay muted></audio>
+
   <div class="header">
     <div class="logo">
       <img src="Assets/Logo.png" alt="" /><img src="Assets/logo.webp" alt="" class="logoEA" />
@@ -28,6 +29,9 @@
     </div>
   </div>
   <div class="container">
+    <h2>Welkom <%= user?.username %>!</h2>
+    <p>Rol: <%= user?.role %>
+    </p>
     <div class="spelen_link" id="spelenButton">
       <div class="card-spelen">
         <div class="Spelen">Spelen</div>
@@ -137,7 +141,7 @@
     window.location.href = "quizpage.ejs";
   }
   function startAnderSpel() {
-    window.location.href = "Jumpgame.ejs";
+    window.location.href = "JumpGame.ejs";
   }
   function sluitPopup() {
     document.getElementById('keuzePopup').style.display = 'none';
