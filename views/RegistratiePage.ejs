@@ -1,82 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <link rel="stylesheet" href="./CSS/reset.css" />
-  <link rel="stylesheet" href="./CSS/registratie.css" />
-  <script src="Javascript/Registratie.js"></script>
+  <title>Registratie</title>
+  <link rel="stylesheet" href="/CSS/reset.css" />
+  <link rel="stylesheet" href="/CSS/registratie.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="/Javascript/Registratie.js" defer></script>
 </head>
 
 <body>
   <header>
     <div class="nav">
-      <img src="./Assets/logo.png" alt="" />
+      <img src="/Assets/logo.png" alt="Logo" />
     </div>
   </header>
 
   <main>
-    <div class="linkerkant">
-      <div class="container">
-        <div class="Patroon">
-          <div class="driehoek"></div>
-          <div class="driehoek"></div>
-          <div class="driehoek"></div>
-          <div class="driehoek"></div>
-        </div>
-        <div class="Patroon">
-          <div class="driehoek"></div>
-          <div class="driehoek"></div>
-          <div class="driehoek"></div>
-        </div>
-        <div class="Patroon">
-          <div class="driehoek"></div>
-          <div class="driehoek"></div>
-        </div>
-        <div class="Patroon">
-          <div class="driehoek"></div>
-        </div>
-      </div>
-      <div class="afbeelding-vinicius"></div>
-    </div>
+
 
     <div class="rechterkant">
       <form id="Formulier" action="/registratie" method="POST">
+        <h2>Maak een account aan</h2>
 
-        <label for="username">Gebruikersnaam</label>
-        <input type="text" id="username" name="username" required />
+        <% if (typeof error !=='undefined' ) { %>
+          <p style="color: red;">
+            <%= error %>
+          </p>
+          <% } %>
 
-        <label for="password">Wachtwoord</label>
-        <input type="password" id="password" name="password" required />
+            <label for="username">Gebruikersnaam</label>
+            <input type="text" id="username" name="username" required />
 
-        <label for="confirm-password">Herhaal wachtwoord</label>
-        <input type="password" id="confirm-password" name="confirm-password" required />
+            <label for="password">Wachtwoord</label>
+            <input type="password" id="password" name="password" required />
 
-        <button type="submit">Registreren</button>
+            <label for="confirm-password">Herhaal wachtwoord</label>
+            <input type="password" id="confirm-password" name="confirm-password" required />
+
+            <button type="submit">Registreren</button>
       </form>
-
-      <div class="container_beneden">
-        <div class="Patroon_beneden">
-          <div class="driehoek_beneden"></div>
-        </div>
-        <div class="Patroon_beneden">
-          <div class="driehoek_beneden"></div>
-          <div class="driehoek_beneden"></div>
-        </div>
-        <div class="Patroon_beneden">
-          <div class="driehoek_beneden"></div>
-          <div class="driehoek_beneden"></div>
-          <div class="driehoek_beneden"></div>
-        </div>
-        <div class="Patroon_beneden">
-          <div class="driehoek_beneden"></div>
-          <div class="driehoek_beneden"></div>
-          <div class="driehoek_beneden"></div>
-          <div class="driehoek_beneden"></div>
-        </div>
-      </div>
     </div>
   </main>
 </body>

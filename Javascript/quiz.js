@@ -1,53 +1,131 @@
 let timeLeft = 10;
 let countdown;
 let scoreTeller = 0;
+let isPaused = false;
 
 const timerElement = document.getElementById("timer");
 const scoreElement = document.querySelector(".al");
-const quizcontainer = document.querySelector(".quiz-container");
-const quizhead = document.querySelector(".quiz-head");
+const pauseButton = document.querySelector(".pause-button");
+
 timerElement.style.color = "white";
 timerElement.style.fontSize = "1.8rem";
 timerElement.style.marginRight = "1rem";
-scoreElement.style.fontSize = "30px"
 
+const clockSound = new Audio('/assets/clock-tick.mp3');
+const failSound = new Audio('/assets/fail.mp3');
+const trueSound = new Audio('/assets/true.mp3');
+clockSound.loop = true;
+
+function showPopup(title, message) {
+  const popup = document.getElementById("popup");
+  const popupTitle = document.getElementById("popup-title");
+  const popupMessage = document.getElementById("popup-message");
+  const popupScore = document.getElementById("popup-score");
+
+  popupTitle.textContent = title;
+  popupMessage.textContent = message;
+
+  if (popupScore) {
+    popupScore.textContent = scoreTeller;
+  }
+
+  popup.classList.remove("hidden");
+  clockSound.pause();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const restartBtn = document.getElementById("restart-btn");
+  if (restartBtn) {
+    restartBtn.addEventListener("click", restartGame);
+  }
+
+  const tipButton = document.querySelector(".tips-button");
+  tipButton.addEventListener("click", gebruikTip);
+
+  if (pauseButton) {
+    pauseButton.addEventListener("click", togglePause);
+  }
+
+  loadNewQuiz();
+});
+
+function restartGame() {
+  scoreTeller = 0;
+  scoreElement.textContent = scoreTeller;
+
+  const popup = document.getElementById("popup");
+  popup.classList.add("hidden");
+
+  const optionsContainer = document.querySelector(".options");
+  optionsContainer.innerHTML = "";
+
+  timeLeft = 10;
+  isPaused = false;
+  pauseButton.innerHTML = `<i class="fas fa-pause"></i>`;
+  loadNewQuiz();
+}
 
 function startTimer() {
   clearInterval(countdown);
-  timeLeft = 10;
   timerElement.style.color = "white";
   timerElement.style.fontWeight = "normal";
-  timerElement.style.fontSize = "30px";
+  timerElement.style.fontSize = "1.8rem";
   timerElement.textContent = `⏱ ${timeLeft}s`;
 
-  // Reset animatiekleur naar blauw bij nieuwe vraag
-  quizcontainer.classList.remove("red-glow");
-  quizcontainer.classList.add("blue-glow");
-  // quizhead.classList.remove("red-glow");
-  // quizhead.classList.add("blue-glow");
+  clockSound.pause();
+  clockSound.currentTime = 0;
 
   countdown = setInterval(() => {
-    timeLeft--;
-    timerElement.textContent = `⏱ ${timeLeft}s`;
+    if (!isPaused) {
+      timeLeft--;
+      timerElement.textContent = `⏱ ${timeLeft}s`;
 
-    if (timeLeft <= 5) {
-      timerElement.style.color = "red";
+      if (timeLeft <= 5) {
+        timerElement.style.color = "red";
+        if (clockSound.paused) {
+          clockSound.play();
+        }
+      } else {
+        if (!clockSound.paused) {
+          clockSound.pause();
+          clockSound.currentTime = 0;
+        }
+      }
 
-      quizcontainer.classList.remove("blue-glow");
-      quizcontainer.classList.add("red-glow");
-
-      // quizhead.classList.remove("blue-glow");
-      // quizhead.classList.add("red-glow");
-    }
-
-    if (timeLeft <= 0) {
-      clearInterval(countdown);
-      endGame("⏱ Tijd is om!");
+      if (timeLeft <= 0) {
+        clearInterval(countdown);
+        clockSound.pause();
+        timerElement.textContent = "⏱ Tijd is op!";
+        timerElement.style.color = "red";
+        timerElement.style.fontWeight = "bold";
+        timerElement.style.fontSize = "2rem";
+        endGame("⏱ Tijd is op!");
+      }
     }
   }, 1000);
 }
+function resetTimeLeft() {
+  if (scoreTeller > 300) {
+    timeLeft = 5;
+  } else if (scoreTeller > 200) {
+    timeLeft = 7;
+  } else {
+    timeLeft = 10;
+  }
+}
 
-
+function togglePause() {
+  if (!isPaused) {
+    clearInterval(countdown);
+    clockSound.pause();
+    pauseButton.innerHTML = `<i class="fas fa-play"></i>`;
+    isPaused = true;
+  } else {
+    isPaused = false;
+    pauseButton.innerHTML = `<i class="fas fa-pause"></i>`;
+    startTimer();
+  }
+}
 
 function endGame(message) {
   clearInterval(countdown);
@@ -55,21 +133,21 @@ function endGame(message) {
   timerElement.style.color = "red";
   timerElement.style.fontWeight = "bold";
   timerElement.style.fontSize = "2rem";
+  clockSound.pause();
 
-  // Opties disablen
   const options = document.querySelectorAll(".option");
   options.forEach(opt => {
     opt.style.pointerEvents = "none";
   });
+  failSound.play().catch(e => console.log("Audio play error:", e));
+  showPopup("⏱ Tijd is op!");
 }
 
 async function loadNewQuiz() {
-  startTimer(); // Start een nieuwe timer voor elke vraag
+  startTimer();
 
   const res = await fetch("/api/quiz");
   const data = await res.json();
-
-  console.log("Quiz data:", data);
 
   const logoImg = document.querySelector(".team-logo");
   logoImg.src = data.logoUrl;
@@ -84,41 +162,27 @@ async function loadNewQuiz() {
     div.textContent = opt;
 
     div.addEventListener("click", () => {
-      clearInterval(countdown); // Stop de timer bij een klik
-
-      const allOptions = document.querySelectorAll(".option");
+      clearInterval(countdown);
 
       if (div.dataset.correct === "true") {
         div.style.backgroundColor = "green";
         div.style.border = "none";
         scoreTeller += 30;
         scoreElement.textContent = scoreTeller;
+        trueSound.play().catch(e => console.log("Audio play error:", e));
+        resetTimeLeft();
 
         setTimeout(() => {
           loadNewQuiz();
         }, 500);
       } else {
+        failSound.play().catch(e => console.log("Audio play error:", e));
         div.style.backgroundColor = "red";
-        quizcontainer.classList.remove("blue-glow");
-        quizcontainer.classList.add("red-glow");
-
-        
-        allOptions.forEach(optEl => {
-          if (optEl.dataset.correct === "true") {
-            optEl.style.backgroundColor = "blue";
-            optEl.style.color = "white";
-          }
-          // Opties disablen na fout antwoord
-          optEl.style.pointerEvents = "none";
-        });
-
-        
+        if (scoreTeller > 0) {
+          scoreTeller -= 30;
+        }
         scoreElement.textContent = scoreTeller;
-
-        // ❌ Toon foutmelding na korte vertraging
-        setTimeout(() => {
-          endGame("❌ Fout!");
-        }, 800);
+        showPopup("Fout!", "Je hebt een fout antwoord gegeven.");
       }
     });
 
@@ -126,5 +190,20 @@ async function loadNewQuiz() {
   });
 }
 
+function gebruikTip() {
+  const opties = Array.from(document.querySelectorAll(".option"));
+  const fouteOpties = opties.filter(optie => optie.dataset.correct === "false");
+  const teVerwijderen = getRandomElements(fouteOpties, 2);
 
-loadNewQuiz();
+  teVerwijderen.forEach(optie => {
+    optie.remove();
+    scoreTeller -= 30;
+    if (scoreTeller < 0) scoreTeller = 0;
+    scoreElement.textContent = scoreTeller;
+  });
+}
+
+function getRandomElements(arr, count) {
+  const shuffled = [...arr].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+}

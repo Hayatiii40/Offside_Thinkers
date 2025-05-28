@@ -1,3 +1,4 @@
+
 import express, { Request, Response } from "express";
 import cors from "cors";
 import path from "path";
@@ -25,6 +26,8 @@ app.use("/assets", express.static(path.join(__dirname, "../Assets")));
 
 
 app.use(express.urlencoded({ extended: true }));
+
+
 app.use(express.json());
 app.use(session({
   secret: 'supergeheimeWPLsessie',
@@ -35,15 +38,77 @@ app.use(session({
 
 
 async function main() {
-    try {
-        
-        await client.connect();
-        console.log("geconnecteerd mongo")
-        database = client.db("database1")
- 
-    } catch (e) {
-        console.error(e);
-    } 
+  try {
+    if(await client.connect())    
+    console.log("✅ Verbonden met MongoDB");
+    database = client.db("database1");
+
+    // ✅ Routes pas starten nadat database klaar is:
+    app.post("/registratie", async (req: Request, res: Response) => {
+      const { username, password, ["confirm-password"]: confirmPassword } = req.body;
+
+      if (!username || !password || !confirmPassword) {
+        return res.status(400).render("RegistratiePage", {
+          title: "Registratie",
+          error: "Vul alle velden in."
+        });
+      }
+
+      if (password !== confirmPassword) {
+        return res.status(400).render("RegistratiePage", {
+          title: "Registratie",
+          error: "Wachtwoorden komen niet overeen."
+        });
+      }
+
+      try {
+        const usersCollection = database.collection<User>("users");
+        const existingUser = await usersCollection.findOne({ username });
+
+        if (existingUser) {
+          return res.status(400).render("RegistratiePage", {
+            title: "Registratie",
+            error: "Gebruikersnaam is al bezet."
+          });
+        }
+
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+        const newUser: User = {
+          username,
+          password: hashedPassword,
+          role: "USER",
+          createdAt: new Date()
+        };
+
+        await usersCollection.insertOne(newUser);
+
+        req.session.user = {
+  username,
+  role: "USER"
+};
+console.log("Gebruiker in sessie:", req.session.user);
+
+res.redirect("/menu");
+
+
+      } catch (err) {
+        console.error("❌ Fout bij registratie:", err);
+        res.status(500).render("error", {
+          message: "Er is een fout opgetreden bij registratie."
+        });
+      }
+    });
+
+    // ✅ Start server nu pas
+    app.listen(PORT, () => {
+      console.log(`🚀 Server draait op http://localhost:${PORT}`);
+    });
+
+  } catch (e) {
+    console.error("❌ Fout bij verbinden met MongoDB:", e);
+  }
 }
 
 main();
@@ -297,6 +362,14 @@ export interface League {
   numberOfAvailableSeasons: number;
   lastUpdated: string;
 }
+interface User {
+  _id?: ObjectId;
+  username: string;
+  password: string; // versleuteld
+  role: 'USER' | 'ADMIN';
+  createdAt: Date;
+}
+
 
 function getRandomInt(max: number) {
   return Math.floor(Math.random() * max);
@@ -354,10 +427,70 @@ app.get("/inlog", (req, res) => {
 app.get("/registratie", (req, res) => {
   res.render("RegistratiePage", { title: "Registratie" });
 });
+ 
 
-app.get("/menu", isAuthenticated,(req, res) => {
-  res.render("Menupagina", { title: "Menu",user:req.session.user  });
-});   
+app.get("/menu", isAuthenticated, (req, res) => {
+  
+  res.render("Menupagina", {
+    title: "Menu",
+    user: req.session.user
+  });
+});
+app.get("/blacklist", isAuthenticated, (req, res) => {
+  
+  res.render("Blacklistpage", {
+    title: "Blacklist",
+    user: req.session.user
+  });
+});
+app.get("/favorieteclub", isAuthenticated, (req, res) => {
+  
+  res.render("FavorieteClub", {
+    title: "Favoriete Club",
+    user: req.session.user
+  });
+});
+app.get("/alleclubs", isAuthenticated, async (req, res) => {
+  try {
+    const clubs = await database.collection("teams").find().toArray();
+    res.render("Clubs", {
+      title: "Alle Clubs",
+      user: req.session.user,
+      clubs, 
+    });
+  } catch (error) {
+    console.error("Fout bij ophalen clubs:", error);
+    res.status(500).render("error", { message: "Kan clubs niet ophalen." });
+  }
+});
+
+app.get("/leagues", isAuthenticated, async (req: Request, res: Response) => {
+  try {
+    if (!database) {
+      throw new Error("Database is niet geïnitialiseerd");
+    }
+
+    const leagues = await database.collection("leagues").find().toArray();
+    const clubs = await database.collection("teams").find().toArray();
+
+    leagues.forEach(league => {
+      league.teams = clubs.filter(club => club.league === league.code);
+    });
+
+    res.render("Leagues", {
+      title: "Leagues",
+      user: req.session.user, 
+      leagues
+    });
+
+  } catch (error) {
+    console.error("Fout bij ophalen leagues:", error);
+    res.status(500).send("Fout bij ophalen leagues");
+  }
+});
+
+
+
 
 app.post("/login", async (req: Request, res: Response) => {
   const { username, password } = req.body;
@@ -370,16 +503,21 @@ app.post("/login", async (req: Request, res: Response) => {
     const user = await database.collection("users").findOne({ username });
 
     if (!user) {
-      return res.render("InlogPagina", { title: "Inloggen", error: "Gebruiker niet gevonden" });
+      return res.render("InlogPagina", {
+        title: "Inloggen",
+        error: "Gebruiker niet gevonden"
+      });
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
-      return res.render("InlogPagina", { title: "Inloggen", error: "Wachtwoord incorrect" });
+      return res.render("InlogPagina", {
+        title: "Inloggen",
+        error: "Wachtwoord incorrect"
+      });
     }
 
-    // Sessiegebruiker instellen
     req.session.user = {
       username: user.username,
       role: user.role
@@ -388,7 +526,9 @@ app.post("/login", async (req: Request, res: Response) => {
     res.redirect("/menu");
   } catch (err) {
     console.error("Loginfout:", err);
-    res.status(500).render("error", { message: "Interne serverfout bij inloggen." });
+    res.status(500).render("error", {
+      message: "Interne serverfout bij inloggen."
+    });
   }
 });
 
@@ -403,41 +543,6 @@ declare module "express-session" {
   }
 }
 
-
-app.post("/registratie", async (req: Request, res: Response) => {
-  const { username, password, ["confirm-password"]: confirmPassword } = req.body;
-
-  if (!username || !password || !confirmPassword) {
-    return res.status(400).render("RegistratiePage", { title: "Registratie", error: "Vul alle velden in." });
-  }
-
-  if (password !== confirmPassword) {
-    return res.status(400).render("RegistratiePage", { title: "Registratie", error: "Wachtwoorden komen niet overeen." });
-  }
-
-  try {
-    const usersCollection = database.collection("users");
-    const existingUser = await usersCollection.findOne({ username });
-
-    if (existingUser) {
-      return res.status(400).render("RegistratiePage", { title: "Registratie", error: "Gebruikersnaam is al bezet." });
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    await usersCollection.insertOne({
-      username,
-      password: hashedPassword,
-      role: "USER",
-      createdAt: new Date()
-    });
-
-    res.redirect("/inlog");
-  } catch (err) {
-    console.error("Fout bij registratie:", err);
-    res.status(500).render("error", { message: "Er is een fout opgetreden bij registratie." });
-  }
-});
 
 
 app.get("/skysoccer", (req,res)=>{
@@ -469,12 +574,12 @@ app.get("/clubdetails/:id", async (req: express.Request, res: express.Response) 
       return;
     }
 
-    // Voorbeeld squad data - vervang dit met echte data uit je database
-    club.squad = club.squad || [
-      { id: 1, name: "John Doe", position: "Forward", nationality: "England", shirtNumber: 9 },
-      { id: 2, name: "Mike Smith", position: "Midfielder", nationality: "Spain", shirtNumber: 8 },
-      // ... meer spelers ...
-    ];
+    // // Voorbeeld squad data - vervang dit met echte data uit je database
+    // club.squad = club.squad || [
+    //   { id: 1, name: "John Doe", position: "Forward", nationality: "England", shirtNumber: 9 },
+    //   { id: 2, name: "Mike Smith", position: "Midfielder", nationality: "Spain", shirtNumber: 8 },
+    //   // ... meer spelers ...
+    // ];
 
     res.render("ClubDetail", { 
       title: club.name, 
@@ -534,10 +639,16 @@ app.get("/api/quiz", async (req: Request, res: Response) => {
   }
 });
 
-
-
+app.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Fout bij uitloggen:", err);
+    }
+    res.redirect("/inlog");
+  });
+});
 
 // ✅ Start server
 app.listen(PORT, () => {
-  console.log("✅ Server draait op http://localhost:${PORT}");
-});
+  console.log(`✅ Server draait op http://localhost:${PORT}`);
+}); 

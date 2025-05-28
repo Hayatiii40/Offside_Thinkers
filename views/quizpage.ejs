@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="CSS/reset.css">
   <link rel="stylesheet" href="CSS/quiz.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <script type="module" src="/Javascript/quiz.js"></script>
 </head>
 
@@ -24,12 +25,11 @@
         <h2 class="al">0</h2>
         <p id="timer">⏱ 60s</p>
         <button class="tips-button">💡</button>
+        <button class="pause-button"><i class="fas fa-pause"></i></button>
       </section>
 
-      <!-- Toon het logo van het team -->
       <img src="<%= logoUrl %>" alt="Team Logo" class="team-logo" />
 
-      <!-- Toon de opties voor de quizvragen -->
       <div class="options">
         <% options.forEach(option=> { %>
           <div class="option">
@@ -43,6 +43,9 @@
     </div>
     <div id="popup" class="popup hidden">
       <div class="popup-content">
+        <a href="/menu"><button class="close-btn" aria-label="Sluiten">
+            <i class="fas fa-times"></i>
+          </button></a>
         <h2 id="popup-title">Game Over</h2>
         <p id="popup-message">Verkeerd antwoord!</p>
         <div class="score-summary">
@@ -50,7 +53,6 @@
           <div><strong>Jouw score:</strong> <span id="popup-score">0</span></div>
         </div>
         <button id="restart-btn">Opnieuw proberen</button>
-        <button class="home-btn">Menu</button>
       </div>
     </div>
   </main>

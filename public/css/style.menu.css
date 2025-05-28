@@ -1,16 +1,18 @@
 * {
-  font-family: arial;
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
 }
 
 body {
-  background-image: url('../Assets/menu-background.webp');
+  background-image: url('/assets/bgr.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  height: 90vh;
-  width: 100vw;
-  overflow: hidden;
   min-height: 130vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100vh;
 }
 
 .header {
@@ -63,20 +65,37 @@ body {
   text-decoration: none;
 }
 
+.fc-title {
+  margin-top: 30px;
+}
+
+.fc {
+  margin-bottom: 30px;
+}
+
+.fc {
+  margin-bottom: 15px;
+  height: 70px;
+}
+
+.blacklisticon {
+  margin-bottom: 2rem;
+
+}
+
 .card-spelen {
+  width: 750px;
   height: 220px;
-  width: 550px;
   background-image: url('../Assets/spelen-foto.webp');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  margin: 40px;
   transition: transform 0.3s ease;
+  border-radius: 10px;
+  margin-bottom: 30px;
 }
 
-.container {
-  zoom: 150%;
-}
+
 
 .card-spelen:hover {
   transform: scale(1.05);
@@ -89,12 +108,22 @@ body {
   margin-left: 10px;
 }
 
+.container {
+  zoom: 120%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 40px;
+  padding-top: 40px;
+  max-width: 600px;
+}
+
 .card {
+  width: 100%;
   height: 120px;
-  width: 510px;
-  opacity: 0.7;
+  opacity: 0.9;
   background-color: white;
-  border-radius: 4%;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,15 +154,19 @@ body {
 .card-titel {
   font-size: 16px;
   text-align: center;
-
 }
 
-.row {
-  display: flex;
+.link-kleine-cards {
+  color: black;
+  text-decoration: none;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 30px;
-  margin-left: 50px;
+  /* ruimte tussen kaarten */
+  width: 100%;
 }
 
 .popup-log {
@@ -169,23 +202,17 @@ button:hover {
   background-color: #0056b3;
 }
 
-.link-kleine-cards {
-  color: black;
-  text-decoration: none;
-}
-
 .leaderboard {
-  width: 400px;
-  height: 30rem;
+  width: 500px;
+  height: 39rem;
   background: rgba(18, 18, 50, 0.9);
   padding: 20px;
   border-radius: 10px;
   position: absolute;
-  right: 12rem;
-  top: 200px;
-  border-radius: 15px;
-  border: 5px solid #ffcc00;
-  box-shadow: 0 0 20px 5px rgba(255, 204, 0, 0.9);
+  right: 3rem;
+  top: 140px;
+  border: 3px solid #5db6ce;
+  box-shadow: 0 0 5px #4133ff, 0 0 10px #4133ff, 0 0 20px #4133ff, 0 0 30px #4133ff;
   color: white;
 }
 
@@ -198,44 +225,6 @@ button:hover {
 
 .leaderboard-item:last-child {
   border-bottom: none;
-}
-
-@media only screen and (max-width: 600px) {
-  .header {
-    flex-direction: row;
-    gap: 50px;
-  }
-
-  .card-spelen {
-    height: 180px;
-    width: 95%;
-    margin-top: 80px;
-    margin-left: auto;
-    margin-right: 5%;
-  }
-
-  .Spelen {
-    font-size: 24px;
-  }
-
-  .row {
-    flex-direction: column;
-    align-items: center;
-    margin-left: 5px;
-    margin-right: 10px;
-  }
-
-  body {
-    overflow: scroll;
-  }
-
-  .container {
-    zoom: 100%;
-  }
-
-  .leaderboard {
-    display: none;
-  }
 }
 
 .popup {
@@ -303,4 +292,36 @@ button:hover {
 
 .annuleer-knop:hover {
   background-color: #c0392b;
+}
+
+@media(max-width:1500px) {
+  .leaderboard {
+    display: none;
+  }
+}
+
+@media (max-width: 800px) {
+  .container {
+    zoom: 100%;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+    width: 95%;
+  }
+
+  .card-spelen {
+    width: 95%;
+  }
+
+  .leaderboard {
+    display: none;
+  }
+
+  body {
+    overflow: scroll;
+  }
 }

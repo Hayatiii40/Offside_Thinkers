@@ -1,17 +1,18 @@
-document.addEventListener('DOMContentLoaded', function () {
-  document
-    .getElementById('Formulier')
-    .addEventListener('submit', function (event) {
-      event.preventDefault(); // Voorkom standaard verzending
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("Formulier");
 
-      let username = document.getElementById('username').value.trim();
-      let password = document.getElementById('Password').value.trim();
+  if (!form) {
+    console.error("❌ Formulier niet gevonden!");
+    return;
+  }
 
-      if (username === '' || password === '') {
-        alert('Vul alle velden in!');
-      } else {
-        alert('Succesvol ingelogd!');
-        window.location.href = '/menu'; // Verwijs door na login 
-      }
-    });
+  form.addEventListener("submit", function (e) {
+    
+    console.log("✅ Formulier wordt verzonden!");
+
+    const username = document.getElementById("username")?.value;
+    const password = document.getElementById("password")?.value;
+    const confirmPassword = document.getElementById("confirm-password")?.value;
+
+  });
 });

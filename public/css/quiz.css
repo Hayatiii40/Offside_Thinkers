@@ -1,3 +1,12 @@
+.pause-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  color: white;
+}
+
 html,
 body {
   margin: 0;
@@ -7,7 +16,7 @@ body {
   background: url('../Assets/stad.jpg') no-repeat center center/cover;
   color: white;
   text-align: center;
-  font-family: Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background-color: #34495e;
 }
 
@@ -22,19 +31,33 @@ body {
   width: 150px;
 }
 
-#eaLogo {
-  width: 50px;
-}
-
 .navbar ul li a {
   color: white;
   text-decoration: none;
-
+  font-size: 16px;
 }
 
 #burger-bar {
   display: none;
   width: 50px;
+}
+
+.back-button {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+  z-index: 9999;
+  background-color: transparent;
+  padding: 10px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .quiz-head {
@@ -43,13 +66,12 @@ body {
   align-items: center;
   margin: 1rem 20rem;
   padding: 0.8rem 1.5rem;
-  background: rgba(46, 56, 113, 0.5);
-  border: 2px solid #797979;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid #4133ff;
   border-radius: 12px;
-  box-shadow: 0 0 10px #ffffff, 0 0 20px #a4a4a4;
+  box-shadow: 0 0 10px #4133ff, 0 0 20px #4133ff;
   backdrop-filter: blur(6px);
-
-  width: 400px;
+  font-size: 20px;
 }
 
 .quiz-container {
@@ -57,22 +79,10 @@ body {
   margin: 0 20rem;
   padding-bottom: 3rem;
   border: 2px solid #4133ff;
+  animation: neonGlow 2s infinite ease-in-out;
   box-shadow: 0 0 8px #4133ff, 0 0 16px #4133ff, 0 0 24px #4133ff;
   border-radius: 20px;
 }
-
-.blue-glow {
-  animation: neonGlow 2s infinite ease-in-out;
-  box-shadow: 0 0 8px #4133ff, 0 0 16px #4133ff, 0 0 24px #4133ff;
-  border: 2px solid #4133ff;
-}
-
-.red-glow {
-  animation: neonGlowRed 2s infinite ease-in-out;
-  box-shadow: 0 0 8px red, 0 0 16px red, 0 0 24px red;
-  border: 2px solid red;
-}
-
 
 @keyframes neonGlow {
   0% {
@@ -88,20 +98,6 @@ body {
   }
 }
 
-@keyframes neonGlowRed {
-  0% {
-    box-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
-  }
-
-  50% {
-    box-shadow: 0 0 10px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000;
-  }
-
-  100% {
-    box-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
-  }
-}
-
 .quiz-head .al,
 .quiz-head #timer {
   background: none;
@@ -113,7 +109,7 @@ body {
 }
 
 .quiz-head .al {
-  color: #ffae00;
+  color: rgb(255, 174, 0);
   text-shadow: 0px 0px 3px #e9c38a;
   font-size: 1.7rem;
   position: relative;
@@ -130,7 +126,6 @@ body {
   height: 100%;
   background: linear-gradient(120deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0.3) 100%);
   transform: skewX(-20deg);
-  /* animation: shine 2.5s infinite ease-in-out; */
 }
 
 @keyframes shine {
@@ -156,7 +151,6 @@ body {
 
 
 .team-logo {
-  /* width: 250px; */
   height: 320px;
   border-radius: 10px;
   padding: 10px;
@@ -205,7 +199,6 @@ body {
   color: white;
   animation: neonGlow2 0.2s 1 ease-in-out forwards, background-color 1s 1 ease-in-out forwards;
   ;
-  /* animation: name duration timing-function delay iteration-count direction fill-mode; */
 }
 
 @keyframes neonGlow2 {
@@ -231,9 +224,8 @@ body {
 .tips-button {
   background: rgba(255, 255, 255, 0);
   padding: 5px;
-  font-size: 2rem;
+  font-size: 1.5rem;
   border-radius: 50%;
-  /* box-shadow: 0 0 6px #ffae00; */
   transition: transform 0.3s ease, text-shadow 0.3s ease;
 }
 
@@ -249,22 +241,6 @@ body {
 }
 
 @media (max-width: 1068px) {
-
-  html {
-    overflow-x: hidden;
-  }
-
-
-
-  .quiz-head {
-    width: 450px;
-  }
-
-  .quiz-container {
-    margin-top: 2rem;
-
-  }
-
   .navbar img {
     width: 100px;
   }
@@ -275,9 +251,8 @@ body {
   }
 
   .team-logo {
-    /* width: 200px;
-    height: 150px; */
-    height: 250px;
+    width: 200px;
+    height: 100px;
   }
 
   .question {
@@ -286,86 +261,188 @@ body {
   }
 
   .options {
-    grid-template-columns: 1fr;
+    grid-template-columns: 290px;
     gap: 10px;
     justify-content: center;
-    align-items: center;
   }
 
   .option {
     font-size: 18px;
-    padding: 12px;
-
+    padding: 10px;
   }
 }
 
-@media (max-width: 680px) {
-  .quiz-head {
-    margin: 1rem;
-
-    flex-direction: column;
-    padding: 1rem;
+@media (max-width: 480px) {
+  .navbar img {
+    width: 50px;
   }
 
-  .quiz-container {
-    /* margin-top: 8rem; */
-    margin: 1rem;
-    padding: 1rem;
-  }
-
-  .options {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .option {
-    width: 100%;
+  #timer {
     font-size: 18px;
-    padding: 12px;
-    box-sizing: border-box;
   }
 
   .team-logo {
-    height: 150px;
-    max-width: 100%;
+    width: 40px;
+    height: 40px;
   }
 
-  .navbar img {
-    width: 80px;
+  .question {
+    font-size: 18px;
+    padding: 10px;
+  }
+
+  .option {
+    font-size: 16px;
+    padding: 8px;
   }
 
   #burger-bar {
-    display: block;
-  }
-
-  .quiz-head .al,
-  .quiz-head #timer {
-    font-size: 1.2rem;
-  }
-
-  .tips-button {
-    font-size: 1.5rem;
-  }
-
-  .tips-foto {
-    width: 40px;
+    display: static;
+    width: 50px;
   }
 }
 
-@media (max-width:478px) {
-  main {
-    padding: 9rem 2rem 2rem 2rem;
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: #ffffff;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  animation: popup-fade 0.3s ease-in-out;
+}
+
+@keyframes popup-fade {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
   }
 
-  .quiz-head {
-    width: 300px;
-    font-size: 10px;
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.75), rgba(50, 50, 50, 0.85));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.popup-content {
+  position: relative;
+  background: linear-gradient(to bottom right, #ffffff, #f9f9f9);
+  padding: 3rem 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  animation: popup-fade 0.4s ease;
+}
+
+@keyframes popup-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
   }
 
-  .options {
-    gap: 5px;
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
+}
+
+.close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.3s, transform 0.2s;
+}
+
+.close-btn:hover {
+  color: #d32f2f;
+  transform: scale(1.15);
+}
 
 
+.popup-content h2 {
+  font-size: 2.2rem;
+  margin-bottom: 0.8rem;
+  color: #d32f2f;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.popup-content p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 1.8rem;
+}
+
+.score-summary {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: #444;
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.score-summary div {
+  margin: 0.5rem 0;
+}
+
+#restart-btn {
+  padding: 0.8rem 1.5rem;
+  font-size: 1.05rem;
+  font-weight: bold;
+  background: linear-gradient(to right, #4caf50, #66bb6a);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+#restart-btn:hover {
+  background: linear-gradient(to right, #45a049, #5cbf60);
+  transform: scale(1.05);
+}
+
+.home-btn {
+  display: none;
+}
+
+.hidden {
+  display: none !important;
 }

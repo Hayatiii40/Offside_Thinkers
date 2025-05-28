@@ -1,34 +1,10 @@
 :root {
     --primary: #333333;
-    /* Lichter blauw */
     --secondary: #002038;
-    /* Iets lichtere variant van Trabzonspor blue */
     --dark: #121212;
     --light: #f8f9fa;
     --background-blue: rgba(100, 170, 255, 0.85);
-    /* Zeer lichte blauwe tint */
-}
 
-main {
-    /* background: linear-gradient(135deg,
-            var(--background-blue) 0%,
-            rgba(150, 190, 255, 0.8) 100%); */
-    background-color: rgba(129, 177, 174, 0.368);
-    width: 100%;
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 40px 30px 30px;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(100, 170, 255, 0.3);
-    backdrop-filter: blur(5px);
-    /* border: 2px solid white; */
-    transform: translateY(0);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 body {
@@ -45,6 +21,26 @@ body {
     align-items: center;
     padding: 20px;
 }
+
+main {
+    background-color: rgba(129, 177, 174, 0.368);
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 40px 30px 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(100, 170, 255, 0.3);
+    backdrop-filter: blur(5px);
+
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 
 
 
@@ -113,7 +109,7 @@ h1::after {
     margin: 0 auto 30px;
 }
 
-/* Rest van de CSS blijft hetzelfde als voorheen */
+
 .detail-item {
     background: rgba(255, 255, 255, 0.605);
     backdrop-filter: blur(5px);
@@ -190,6 +186,3 @@ h1::after {
     border-bottom: 1px solid #ccc;
     color: black;
 }
-
-
-/* Rest van de CSS blijft hetzelfde */
