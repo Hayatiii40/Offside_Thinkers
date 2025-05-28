@@ -1,4 +1,3 @@
-
 import express, { Request, Response } from "express";
 import cors from "cors";
 import path from "path";
@@ -76,11 +75,17 @@ async function main() {
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
         const newUser: User = {
-          username,
-          password: hashedPassword,
-          role: "USER",
-          createdAt: new Date()
-        };
+  username,
+  password: hashedPassword,
+  role: "USER",
+  createdAt: new Date(),
+  favourites: [],
+  favouriteLeague: undefined,
+  blacklistedClubs: [],
+  highscore1: 0,
+  highscore2: 0
+};
+
 
         await usersCollection.insertOne(newUser);
 
@@ -368,6 +373,11 @@ interface User {
   password: string; // versleuteld
   role: 'USER' | 'ADMIN';
   createdAt: Date;
+  favourites: number[];         
+  favouriteLeague?: number;     
+  blacklistedClubs: number[];   
+  highscore1: number;           
+  highscore2: number; 
 }
 
 
