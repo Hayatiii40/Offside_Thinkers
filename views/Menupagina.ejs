@@ -89,16 +89,18 @@
 
   <div class="leaderboard">
     <h2>Leaderboard</h2>
-    <div class="leaderboard-item"><span>1. Player Name</span><span>3050</span></div>
-    <div class="leaderboard-item"><span>2. Player Name</span><span>2955</span></div>
-    <div class="leaderboard-item"><span>3. Player Name</span><span>2649</span></div>
-    <div class="leaderboard-item"><span>4. Player Name</span><span>2403</span></div>
-    <div class="leaderboard-item"><span>5. Player Name</span><span>2396</span></div>
-    <div class="leaderboard-item"><span>6. Player Name</span><span>2208</span></div>
-    <div class="leaderboard-item"><span>7. Player Name</span><span>2000</span></div>
-    <div class="leaderboard-item"><span>8. Player Name</span><span>1985</span></div>
-    <div class="leaderboard-item"><span>9. Player Name</span><span>1805</span></div>
+    <% users.sort((a, b)=> (b.highscore1 || 0) - (a.highscore1 || 0)).forEach((user, index) => { %>
+      <div class="leaderboard-item">
+        <span>
+          <%= index + 1 %>. <%= user.username %>
+        </span>
+        <span>
+          <%= user.highscore1 || 0 %>
+        </span>
+      </div>
+      <% }) %>
   </div>
+
 </body>
 <script>
   function showPopup() {
@@ -110,7 +112,7 @@
     document.getElementById('popup-log').style.display = 'none';
   }
   function loguit() {
-    window.location.href = 'InlogPagina.html';
+    window.location.href = '/logout';
   }
 
   document.querySelector('.card-spelen').addEventListener('click', function () {

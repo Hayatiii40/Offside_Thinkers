@@ -49,7 +49,10 @@
         <h2 id="popup-title">Game Over</h2>
         <p id="popup-message">Verkeerd antwoord!</p>
         <div class="score-summary">
-          <div><strong>Highscore:</strong> <span id="popup-highscore">0</span></div>
+          <div><strong>Highscore:</strong> <span id="popup-highscore">
+              <%= highscore %>
+            </span></div>
+
           <div><strong>Jouw score:</strong> <span id="popup-score">0</span></div>
         </div>
         <button id="restart-btn">Opnieuw proberen</button>

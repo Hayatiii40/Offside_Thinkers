@@ -370,14 +370,14 @@ export interface League {
 interface User {
   _id?: ObjectId;
   username: string;
-  password: string; // versleuteld
+  password: string;
   role: 'USER' | 'ADMIN';
   createdAt: Date;
   favourites: number[];         
   favouriteLeague?: number;     
   blacklistedClubs: number[];   
   highscore1: number;           
-  highscore2: number; 
+  highscore2: number;           
 }
 
 
@@ -439,13 +439,16 @@ app.get("/registratie", (req, res) => {
 });
  
 
-app.get("/menu", isAuthenticated, (req, res) => {
-  
-  res.render("Menupagina", {
-    title: "Menu",
-    user: req.session.user
-  });
+app.get("/menu", async (req: Request, res: Response) => {
+  try {
+    const users = await database.collection("users").find().toArray();
+    res.render("Menupagina", { users });
+  } catch (err) {
+    console.error("Fout bij ophalen gebruikers:", err);
+    res.status(500).send("Fout bij laden van leaderboard.");
+  }
 });
+
 app.get("/blacklist", isAuthenticated, (req, res) => {
   
   res.render("Blacklistpage", {
@@ -584,12 +587,7 @@ app.get("/clubdetails/:id", async (req: express.Request, res: express.Response) 
       return;
     }
 
-    // // Voorbeeld squad data - vervang dit met echte data uit je database
-    // club.squad = club.squad || [
-    //   { id: 1, name: "John Doe", position: "Forward", nationality: "England", shirtNumber: 9 },
-    //   { id: 2, name: "Mike Smith", position: "Midfielder", nationality: "Spain", shirtNumber: 8 },
-    //   // ... meer spelers ...
-    // ];
+    
 
     res.render("ClubDetail", { 
       title: club.name, 
@@ -604,22 +602,25 @@ app.get("/clubdetails/:id", async (req: express.Request, res: express.Response) 
 
 
 
-// ✅ QUIZ pagina
-app.get("/quiz", async (req: Request, res: Response) => {
+app.get("/quiz", isAuthenticated, async (req: Request, res: Response) => {
   try {
-    // const allClubs = await fetchAllClubPages(3); // Haal pagina 1 t/m 3 op
-
     const allClubs = Object.keys(clubLogos);
 
     const correctAnswer = allClubs[getRandomInt(allClubs.length)];
     const logoUrl = clubLogos[correctAnswer];
-  
     const options = getShuffledOptions(correctAnswer, allClubs);
-  
+
+    const username = req.session.user?.username;
+
+    const user = await database.collection("users").findOne({ username });
+
+    const highscore = user?.highscore1 || 0;
+
     res.render("quizpage", {
       logoUrl,
       correctAnswer,
       options,
+      highscore 
     });
   } catch (error) {
     console.error("Fout bij ophalen clubs:", error);
@@ -627,7 +628,8 @@ app.get("/quiz", async (req: Request, res: Response) => {
   }
 });
 
-// ✅ API endpoint (JSON)
+
+
 app.get("/api/quiz", async (req: Request, res: Response) => {
   try {
     const allClubs = Object.keys(clubLogos);
@@ -657,8 +659,74 @@ app.get("/logout", (req, res) => {
     res.redirect("/inlog");
   });
 });
+app.post("/api/user/preferences", isAuthenticated, async (req, res) => {
+  const { favourites, favouriteLeague, blacklistedClubs } = req.body;
+  const username = req.session.user?.username;
 
-// ✅ Start server
-app.listen(PORT, () => {
-  console.log(`✅ Server draait op http://localhost:${PORT}`);
-}); 
+  try {
+    await database.collection("users").updateOne(
+      { username },
+      {
+        $set: {
+          favourites,
+          favouriteLeague,
+          blacklistedClubs,
+        },
+      }
+    );
+    res.json({ message: "Voorkeuren opgeslagen" });
+  } catch (error) {
+    console.error("Fout bij opslaan voorkeuren:", error);
+    res.status(500).json({ error: "Opslaan mislukt" });
+  }
+});
+
+app.post("/api/save-score", async (req: Request, res: Response): Promise<void> => {
+  const { score } = req.body;
+  const username = req.session.user?.username;
+
+  if (!username) {
+    res.status(401).json({ error: "Niet ingelogd" });
+    return;
+  }
+
+  try {
+    const users = database.collection<User>("users");
+    const user = await users.findOne({ username });
+
+    if (!user) {
+      res.status(404).json({ error: "Gebruiker niet gevonden" });
+      return;
+    }
+
+    if (score > user.highscore1) {
+      await users.updateOne({ username }, { $set: { highscore1: score } });
+      res.json({ message: "Nieuwe highscore opgeslagen!" });
+    } else {
+      res.json({ message: "Score lager dan highscore, niet opgeslagen" });
+    }
+  } catch (err) {
+    console.error("Fout bij opslaan score:", err);
+    res.status(500).json({ error: "Er ging iets mis bij het opslaan" });
+  }
+});
+app.get("/leaderboard", async (req, res) => {
+  try {
+    const users = await database.collection<User>("users")
+      .find({}, { projection: { username: 1, highscore1: 1, highscore2: 1 } })
+      .sort({ highscore1: -1 }) // Sorteer op hoogste score
+      .toArray();
+
+    res.render("Leaderboard", {
+      title: "Leaderboard",
+      users
+    });
+  } catch (err) {
+    console.error("Fout bij ophalen leaderboard:", err);
+    res.status(500).render("error", { message: "Leaderboard ophalen mislukt." });
+  }
+});
+
+
+
+

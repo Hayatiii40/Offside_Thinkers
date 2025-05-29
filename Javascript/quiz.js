@@ -29,9 +29,20 @@ function showPopup(title, message) {
     popupScore.textContent = scoreTeller;
   }
 
+  
+  fetch('/api/save-score', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ score: scoreTeller })
+  })
+    .then(res => res.json())
+    .then(data => console.log(data.message))
+    .catch(err => console.error("Fout bij opslaan score:", err));
+
   popup.classList.remove("hidden");
   clockSound.pause();
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const restartBtn = document.getElementById("restart-btn");
@@ -50,18 +61,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function restartGame() {
-  scoreTeller = 0;
-  scoreElement.textContent = scoreTeller;
+  
+  location.reload(); 
 
-  const popup = document.getElementById("popup");
-  popup.classList.add("hidden");
 
-  const optionsContainer = document.querySelector(".options");
-  optionsContainer.innerHTML = "";
-
-  timeLeft = 10;
-  isPaused = false;
-  pauseButton.innerHTML = `<i class="fas fa-pause"></i>`;
   loadNewQuiz();
 }
 
@@ -207,3 +210,8 @@ function getRandomElements(arr, count) {
   const shuffled = [...arr].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, count);
 }
+fetch('/api/save-score', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ score: scoreTeller })
+});

@@ -6,15 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
   articles.forEach((element) => {
     element.addEventListener('click', (event) => {
       event.preventDefault();
-      warning.classList.add('show'); // Gebruik de CSS klasse in plaats van directe style
+      warning.classList.add('show'); 
     });
   });
 
   warbut.addEventListener('click', () => {
-    warning.classList.remove('show'); // Verwijder de klasse om te verbergen
+    warning.classList.remove('show'); 
   });
 
-  // Search functionaliteit blijft hetzelfde
+  
   let searchbar = document.querySelector('input');
   let projecten = document.querySelectorAll('a');
   let button = document.querySelector('button');
