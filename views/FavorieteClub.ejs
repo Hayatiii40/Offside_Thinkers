@@ -1,107 +1,41 @@
 <!DOCTYPE html>
-<html lang="nl">
-
-<head>
-  <meta charset="UTF-8" />
-  <title>Favoriete Clubs</title>
-  <link rel="stylesheet" href="/CSS/favc.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-</head>
-
-<body>
-  <header>
-    <img id="teamlogo" src="/assets/Logo.png" alt="offsidelogo" />
-    <img id="ealogo" src="/assets/eaLogo.png" alt="ealogo" />
-  </header>
-  <a href="javascript:history.back()" class="back-button">
-    <i class="fas fa-arrow-left"></i>
-  </a>
-  <main>
-    <div id="container">
-      <section class="zone1">
-        <h1>Favoriete Clubs</h1>
-        <div class="search-wrapper">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="CSS/reset.css" />
+    <link rel="stylesheet" href="CSS/favc.css" />
+    <script src="Javascript/favc.js" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <img id="teamlogo" src="Assets/Logo.png" alt="offsidelogos" />
+      <img id="ealogo" src="Assets/eaLogo.png" alt="ealogo" />
+    </header>
+    <main>
+      <div id="container">
+        <section class="zone1">
+          <h1>FAVORIETE CLUBS</h1>
           <input id="searchbar" type="text" placeholder="Zoek een club" />
           <p class="glass">
             <i class="fa-solid fa-magnifying-glass" style="color: grey"></i>
           </p>
           <button id="searchbutton">Zoeken</button>
-        </div>
-      </section>
-
-      <section class="zone2" id="favorites-list"></section>
-    </div>
-  </main>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const container = document.getElementById("favorites-list");
-      const searchInput = document.getElementById("searchbar");
-
-
-      let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
-
-
-      function removeFavorite(name) {
-        favorites = favorites.filter(c => c.name.toLowerCase() !== name);
-        localStorage.setItem("favorites", JSON.stringify(favorites));
-        render(favorites);
-      }
-
-
-      function render(clubs) {
-        container.innerHTML = "";
-        if (clubs.length === 0) {
-          container.innerHTML = "<p>Geen favoriete clubs gevonden.</p>";
-          return;
-        }
-
-        clubs.forEach(club => {
-          const div = document.createElement("div");
-          div.className = "team";
-          div.setAttribute("data-name", club.name.toLowerCase());
-
-          div.innerHTML = `
-          <img src="${club.crest}" alt="${club.name}" class="team-logo" />
-          <span>${club.name}</span>
-          <div class="button-wrapper">
-            <button class="info-btn">Info</button>
-            <button class="delete-btn">Verwijderen</button>
-          </div>`
-            ;
-
-
-          div.querySelector(".info-btn").addEventListener("click", (e) => {
-            e.stopPropagation();
-            if (club.id) {
-              window.location.href = `/clubdetails/${club.id}`;
-            } else {
-              alert("Geen club-ID gevonden.");
-            }
-          });
-
-
-          div.querySelector(".delete-btn").addEventListener("click", (e) => {
-            e.stopPropagation();
-            removeFavorite(club.name.toLowerCase());
-          });
-
-          container.appendChild(div);
-        });
-      }
-
-
-      render(favorites);
-
-
-      document.getElementById("searchbutton").addEventListener("click", () => {
-        const query = searchInput.value.toLowerCase();
-        const filtered = favorites.filter(c => c.name.toLowerCase().includes(query));
-        render(filtered);
-      });
-    });
-  </script>
-
-</body>
-
+        </section>
+        <section class="zone2">
+          <div class="team">Real Madrid</div>
+          <div class="team">Liverpool</div>
+          <div class="team">Barcelona</div>
+          <div class="team">Manchester City</div>
+          <div class="team">Manchester United</div>
+          <div class="team">Arsenal</div>
+        </section>
+      </div>
+    </main>
+  </body>
 </html>

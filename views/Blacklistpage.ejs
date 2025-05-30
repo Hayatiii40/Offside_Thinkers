@@ -1,84 +1,53 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <title>Blacklist</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <link rel="stylesheet" href="/CSS/Blacklistpage.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="css/reset.css" href="./CSS/reset.css">
+    <link rel="stylesheet" href="./CSS/landing.css">
+    <link rel="stylesheet" href="./CSS/Blacklistpage.css">
+
+    <title>Document</title>
 </head>
 
-<body>
-    <a href="javascript:history.back()" class="back-button">
-        <i class="fas fa-arrow-left"></i>
-    </a>
+<nav class="navbar">
+    <div class="logo"><img src="./Assets/image-removebg-preview.png" alt="image-removebg-preview"></div>
+    <div class="nav-links">
+    </div>
+</nav>
 
-    <header>
-        <img id="teamlogo" src="/assets/Logo.png" alt="Offside Logo" />
-        <img id="ealogo" src="/assets/eaLogo.png" alt="EA Logo" />
-    </header>
 
-    <main>
-        <div id="container">
-            <section class="zone1">
-                <h1>Blacklistpage</h1>
-                <div class="search-wrapper">
-                    <input id="searchbar" type="text" placeholder="Zoek een club" />
-                    <p class="glass">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </p>
-                    <button id="searchbutton">Zoeken</button>
-                </div>
-            </section>
+<main>
+    <div class="Blacklist">Blacklist</div>
 
-            <section class="zone2" id="favorites-list">
-            </section>
-        </div>
-    </main>
+    <div class="container-wrapper">
+        <img src="Assets/Adana_Demirspor_logo.png" alt="Adana_Demirspor" id="foto" class="Adana_Demirspor">
+        <div id="item">ADS</div>
+        <button class="delete-btn">X </button>
+    </div> 
+    </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const container = document.getElementById("favorites-list");
-            const searchInput = document.getElementById("searchbar");
-            let blacklist = JSON.parse(localStorage.getItem("Blacklistpage") || "[]");
+    <div class="container-wrapper">
+        <img src="Assets/Paris_Saint-Germain_F.C..svg.png" alt="Paris_Saint-Germain" id="foto" class="Paris_Saint-Germain">
+        <div id="item">PSG</div>
+        <button class="delete-btn">X </button>
+        
+    </div>
 
-            function render(clubs) {
-                container.innerHTML = "";
-                if (clubs.length === 0) {
-                    container.innerHTML = "<p>Geen clubs op de blacklist.</p>";
-                    return;
-                }
+    <div class="container-wrapper">
+        <img src="Assets/Real_Madrid_CF.svg.png" alt="Real_Madrid_" id="foto" class="Real_Madrid">
+        <div id="item">Real Madrid</div>
+        <button class="delete-btn">X </button>
+       
+    </div>
 
-                clubs.forEach(club => {
-                    const div = document.createElement("div");
-                    div.className = "team";
-                    div.setAttribute("data-name", club.name.toLowerCase());
-                    div.innerHTML = `
-                        <img src="${club.crest}" alt="${club.name}" class="team-logo" />
-                        <span class="team-name">${club.name}</span>
-                        <button class="delete-btn" onclick="removeBlacklist('${club.name.toLowerCase()}')">Verwijderen</button>
-                        <button class="info">Info</button>`
-                        ;
-                    container.appendChild(div);
-                });
-            }
 
-            render(blacklist);
 
-            document.getElementById("searchbutton").addEventListener("click", () => {
-                const query = searchInput.value.toLowerCase();
-                const filtered = blacklist.filter(c => c.name.toLowerCase().includes(query));
-                render(filtered);
-            });
 
-            window.removeBlacklist = function (name) {
-                blacklist = blacklist.filter(c => c.name.toLowerCase() !== name);
-                localStorage.setItem("Blacklistpage", JSON.stringify(blacklist));
-                render(blacklist);
-            };
-        });
-    </script>
+
+</main>
+
 </body>
 
 </html>

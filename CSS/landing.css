@@ -2,67 +2,60 @@
 csscode
 */
 
-body {
-    background-image: url("/Assets/landbg.png");
+body{
+    background-image: url("../Assets/landbg.png");
     height: 98vh;
     width: 98vw;
-    background-size: cover;
+    background-size:cover;
     background-repeat: repeat;
-    overflow: hidden;
-    font-family: Arial, Helvetica, sans-serif;
+overflow: hidden;
+font-family: Arial, Helvetica, sans-serif;
 }
-
-header {
+header{
     height: 4rem;
-    width: 100vw;
+    width: 100vw;    
     display: flex;
     align-items: center;
     justify-content: right;
-
+    
 }
-
-.logger,
-.prof {
+.logger,.prof{
     padding-right: 1rem;
-
+    
 }
-
-.logo {
+.logo{
     position: absolute;
     left: 10px;
     height: 2.5rem;
 
 }
 
-.prof {
+.prof{
     font-size: 2rem;
     transition: transform 150ms ease-in-out;
 }
 
-.logger {
+.logger{
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     transition: font-size 150ms ease-in-out;
 }
-
-.logger:hover {
+.logger:hover{
     font-size: 1.1rem;
 }
-
-.prof:hover {
-    transform: scale(1.06);
+.prof:hover{    
+    transform: scale(1.06);    
 }
 
 /* ------------------------HEADER-------------------------- */
 
-main {
+main{
     display: grid;
     justify-content: center;
     align-items: center;
-    grid-template-rows: 1fr;
+    grid-template-rows:1fr;
 }
-
-.zone2 {
+.zone2{
     padding: 5rem;
     width: 90vw;
     height: 90vh;
@@ -72,19 +65,18 @@ main {
     align-items: center;
     flex-wrap: wrap;
     flex-basis: 500px;
-
+    
 }
-
-.zone1 {
-    display: flex;
+.zone1{
+    display: flex;   
     justify-content: center;
-    align-items: center;
-    position: relative;
-    margin-top: 1rem;
+    align-items: center;  
+    position: relative;    
+    margin-top: 1rem;  
 
 }
 
-input {
+input{
     padding-left: 3rem;
     width: 27rem;
     height: 2.5rem;
@@ -95,26 +87,24 @@ input {
     font-weight: 500;
     font-size: 1.2rem;
 }
-
-button {
+button{
     background-color: #5e1d32;
     height: 2rem;
     width: 10rem;
-    border-radius: 5rem;
+    border-radius:5rem ;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-left: 1rem;
     color: rgb(192, 192, 192);
     font-weight: 600;
-
+    
 }
-
-#warning {
+#warning{
     border: 1px solid grey;
     padding: 0 1rem;
     height: 13rem;
-    background-color: #ffcccc;
+    background-color: #ffcccc ;   
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -128,8 +118,7 @@ button {
     display: none;
     color: #333333;
 }
-
-#warbut {
+#warbut{
     margin-top: 3rem;
     margin-left: 0rem;
     height: 3rem;
@@ -137,21 +126,20 @@ button {
     font-size: 1.3rem;
     box-shadow: 0px 5px 5px#38111d;
     border: 1px solid grey;
-
+    
 }
-
-#warbut:active {
+#warbut:active{
     transform: scale(0.95);
     box-shadow: none;
 }
 
-#vergrootglas {
+#vergrootglas{
     position: relative;
     left: 30px;
-    color: #727272;
+    color:#727272;
 }
 
-main div article {
+main div article{
     width: 400px;
     height: 18rem;
     background-color: rgba(128, 128, 128, 0.502);
@@ -159,22 +147,20 @@ main div article {
     border-radius: 1rem;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: white;   
     font-size: 3rem;
     font-weight: 600;
-    border: 1px solid grey;
+    border: 1px solid grey; 
     opacity: 0.7;
-    transition: opacity 150ms ease-in-out, transform 150ms ease-in-out, border 150ms ease-in-out;
+    transition: opacity 150ms ease-in-out, transform 150ms ease-in-out, border 150ms ease-in-out;  
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 1);
-
+    
 }
-
-article:hover {
+article:hover{
     opacity: 1;
     transform: scale(1.06);
     border: none;
 }
-
 /* article:nth-child(1),article:nth-child(2),article:nth-child(3){
     
 } */
@@ -183,64 +169,60 @@ article:hover {
 } */
 
 #fifa {
-    background-image: url('/Assets/stad.jpg');
+    background-image: url('../Assets/stad.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 #fortnite {
-    background-image: url('/Assets/fortnite.jpg');
+    background-image: url('../Assets/fortnite.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 #lego {
-    background-image: url('/Assets/legogo.jpg');
+    background-image: url('../Assets/legogo.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     text-align: center;
 }
 
 #lotr {
-    background-image: url('/Assets/lotr.jpg');
+    background-image: url('../Assets/lotr.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 #MTG {
-    background-image: url('/Assets/mtg.jpg');
+    background-image: url('../Assets/mtg.jpg');
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; 
 }
-
 #pokemon {
-    background-image: url('/Assets/poke.png');
+    background-image: url('../Assets/poke.png');
     background-size: cover;
     background-repeat: no-repeat;
 }
-
 @media (max-width: 1820px) {
-    body {
+    body{
         overflow-y: visible;
     }
 }
-
 @media (max-width: 1120px) {
-    #warning {
-        left: 30vw;
+    #warning{
+        left:30vw;
     }
 }
-
-@media (max-width: 650px) {
-    article {
+@media (max-width: 650px){
+    article{
         width: 100vw;
     }
-
-    input {
+    input{
         width: 12rem;
     }
-
-    button {
+    button{
         width: 5rem;
     }
 }
+ 
+
