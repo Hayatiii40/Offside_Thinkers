@@ -14,4 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+
+
+fetch("/api/user/preferences", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(voorkeuren),
+});
+
 });

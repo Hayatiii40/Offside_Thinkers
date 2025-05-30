@@ -1,22 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
-  let warning = document.querySelector('#warning');
-  let warbut = document.querySelector('#warbut');
+  let warning = document.getElementById('warning');
+  let warbut = document.getElementById('warbut');
   let articles = document.querySelectorAll('.forbidden');
-
-  warning.style.display = 'none';
 
   articles.forEach((element) => {
     element.addEventListener('click', (event) => {
       event.preventDefault();
-      warning.style.display = 'flex';
+      warning.classList.add('show'); 
     });
   });
 
   warbut.addEventListener('click', () => {
-    warning.style.display = 'none';
+    warning.classList.remove('show'); 
   });
-});
-document.addEventListener('DOMContentLoaded', () => {
+
+  
   let searchbar = document.querySelector('input');
   let projecten = document.querySelectorAll('a');
   let button = document.querySelector('button');
