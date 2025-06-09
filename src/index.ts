@@ -42,7 +42,6 @@ async function main() {
     console.log("✅ Verbonden met MongoDB");
     database = client.db("database1");
 
-    // ✅ Routes pas starten nadat database klaar is:
     app.post("/registratie", async (req: Request, res: Response) => {
       const { username, password, ["confirm-password"]: confirmPassword } = req.body;
 
@@ -69,7 +68,7 @@ async function main() {
             title: "Registratie",
             error: "Gebruikersnaam is al bezet."
           });
-        }
+         }
 
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -106,7 +105,7 @@ res.redirect("/menu");
       }
     });
 
-    // ✅ Start server nu pas
+    
     app.listen(PORT, () => {
       console.log(`🚀 Server draait op http://localhost:${PORT}`);
     });
@@ -404,28 +403,28 @@ function isAuthenticated(req: Request, res: Response, next: Function) {
 }
 
 
-async function fetchAllClubPages(pages: number): Promise<Club[]> {
-  const headers = {
-    Accept: "application/json",
-    "X-AUTH-TOKEN": "8ba2f493-4588-5f0d-99a2-a7a67d2c6ae6",
-  };
+// async function fetchAllClubPages(pages: number): Promise<Club[]> {
+//   const headers = {
+//     Accept: "application/json",
+//     "X-AUTH-TOKEN": "8ba2f493-4588-5f0d-99a2-a7a67d2c6ae6",
+//   };
 
-  const allClubs: Club[] = [];
+//   const allClubs: Club[] = [];
 
-  for (let page = 1; page <= pages; page++) {
-    const response = await fetch("https://api.futdatabase.com/api/clubs?page=${page}, { headers }");
-    if (!response.ok) {
-      throw new Error("API-fout op pagina ${page}: ${response.status}");
-    }
+//   for (let page = 1; page <= pages; page++) {
+//     const response = await fetch("https://api.futdatabase.com/api/clubs?page=${page}, { headers }");
+//     if (!response.ok) {
+//       throw new Error("API-fout op pagina ${page}: ${response.status}");
+//     }
 
-    const data = (await response.json()) as ClubsResponse;
-    allClubs.push(...data.items);
-  }
-  console.log(allClubs)
-  return allClubs;
-}
+//     const data = (await response.json()) as ClubsResponse;
+//     allClubs.push(...data.items);
+//   }
+//   console.log(allClubs)
+//   return allClubs;
+// }
 
-// ✅ ROUTES
+
 app.get("/", (req, res) => {
   res.render("Landingspage", { title: "Welcome to Glory" });
 });
@@ -714,7 +713,7 @@ app.get("/leaderboard", async (req, res) => {
   try {
     const users = await database.collection<User>("users")
       .find({}, { projection: { username: 1, highscore1: 1, highscore2: 1 } })
-      .sort({ highscore1: -1 }) // Sorteer op hoogste score
+      .sort({ highscore1: -1 }) 
       .toArray();
 
     res.render("Leaderboard", {
