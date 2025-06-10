@@ -12,7 +12,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {{
+  "dependencies": {
   "name": "wpl_project",
   "version": "1.0.0",
   "description": "Dit is de project die we gaan uitwerken tot een goed einde en zullen dit later presenteren naar het publiek.",
