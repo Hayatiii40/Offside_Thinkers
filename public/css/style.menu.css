@@ -86,7 +86,7 @@ body {
 .card-spelen {
   width: 750px;
   height: 220px;
-  background-image: url('../Assets/spelen-foto.webp');
+  background-image: url('../assets/spelen-foto.webp');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
