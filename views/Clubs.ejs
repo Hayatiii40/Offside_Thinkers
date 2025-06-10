@@ -1,76 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="CSS/Clubs.css">
-  <title>Document</title>
+  <meta charset="UTF-8" />
+  <title>Alle Clubs</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="/CSS/Clubs.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
-
-
-
 <body>
-  <div class="top-bar">
-    <h2>Alle Clubs</h2>
-    <button onclick="window.location.href='index.html'">Terug naar menu</button>
-  </div>
+  <a href="javascript:history.back()" class="back-button">
+    <i class="fas fa-arrow-left"></i>
+  </a>
 
-  <div id="clubList">
-    <div class="club-container">
-      <img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/79/Ajax_Amsterdam.svg/1200px-Ajax_Amsterdam.svg.png"
-        alt="Ajax" />
-      <h3>Ajax</h3>
-      <p>Coach: John Heitinga</p>
-      <p>Oprichtingsjaar: 1900</p>
-      <button onclick="addToFavorites('Ajax')">Favoriet</button>
-      <button onclick="addToBlacklist('Ajax')">Blacklist</button>
+  <header>
+    <img id="teamlogo" src="/assets/Logo.png" alt="Offside Logo" />
+    <img id="ealogo" src="/assets/eaLogo.png" alt="EA Logo" />
+  </header>
+
+  <main>
+    <div id="container">
+      <section class="zone1">
+        <h1>Alle Clubs</h1>
+        <div class="search-wrapper">
+          <input id="searchbar" type="text" placeholder="Zoek club..." />
+          <p class="glass">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </p>
+          <button id="searchbutton">Zoeken</button>
+        </div>
+      </section>
+
+      <section class="zone2" id="clubs-list">
+        <% clubs.forEach(club=> { %>
+          <div class="team" data-name="<%= club.name.toLowerCase() %>">
+            <% if (club.crest) { %>
+              <img src="<%= club.crest %>" alt="<%= club.name %> logo" class="team-logo" />
+              <% } %>
+                <span class="team-name">
+                  <%= club.name %>
+                </span>
+                <button class="info" onclick="addToFavorites('<%= club.name %>', '<%= club.crest %>')">👍
+                  Favoriet</button>
+                <button class="delete-btn" onclick="addToBlacklist('<%= club.name %>', '<%= club.crest %>')">👎
+                  Blacklist</button>
+          </div>
+          <% }); %>
+      </section>
     </div>
-
-    <div class="club-container">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/en/thumb/4/47/FC_Barcelona_%28crest%29.svg/210px-FC_Barcelona_%28crest%29.svg.png"
-        alt="Barcelona" />
-      <h3>Barcelona</h3>
-      <p>Coach: Xavi Hernandez</p>
-      <p>Oprichtingsjaar: 1899</p>
-      <button onclick="addToFavorites('Barcelona')">Favoriet</button>
-      <button onclick="addToBlacklist('Barcelona')">Blacklist</button>
-    </div>
-
-    <div class="club-container">
-      <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/250px-Real_Madrid_CF.svg.png"
-        alt="Real Madrid" />
-      <h3>Real Madrid</h3>
-      <p>Coach: Carlo Ancelotti</p>
-      <p>Oprichtingsjaar: 1902</p>
-      <button onclick="addToFavorites('Real Madrid')">Favoriet</button>
-      <button onclick="addToBlacklist('Real Madrid')">Blacklist</button>
-    </div>
-  </div>
-
-  <br /><br />
+  </main>
 
   <script>
-    function addToFavorites(clubName) {
-      let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-      if (!favorites.includes(clubName)) {
-        favorites.push(clubName);
-        localStorage.setItem('favorites', JSON.stringify(favorites));
-        alert(clubName + ' toegevoegd aan favorieten!');
+    document.addEventListener("DOMContentLoaded", () => {
+      const searchInput = document.getElementById('searchbar');
+      const clubDivs = document.querySelectorAll('.team');
+
+      document.getElementById('searchbutton').addEventListener('click', () => {
+        const query = searchInput.value.toLowerCase();
+        clubDivs.forEach(div => {
+          const name = div.getAttribute('data-name');
+          div.style.display = name.includes(query) ? 'flex' : 'none';
+        });
+      });
+    });
+
+    function addToFavorites(name, crest) {
+      let favs = JSON.parse(localStorage.getItem('favorites') || '[]');
+      if (!favs.some(c => c.name === name)) {
+        favs.push({ name, crest });
+        localStorage.setItem('favorites', JSON.stringify(favs));
+        alert(name + ' toegevoegd aan favorieten!');
+      } else {
+        alert(name + ' staat al in favorieten!');
       }
     }
 
-    function addToBlacklist(clubName) {
-      let blacklist = JSON.parse(localStorage.getItem('blacklist')) || [];
-      if (!blacklist.includes(clubName)) {
-        blacklist.push(clubName);
-        localStorage.setItem('blacklist', JSON.stringify(blacklist));
-        alert(clubName + ' toegevoegd aan blacklist!');
+    function addToBlacklist(name, crest) {
+      let black = JSON.parse(localStorage.getItem('Blacklistpage') || '[]');
+      if (!black.some(c => c.name === name)) {
+        black.push({ name, crest });
+        localStorage.setItem('Blacklistpage', JSON.stringify(black));
+        alert(name + ' toegevoegd aan blacklist!');
+      } else {
+        alert(name + ' staat al in blacklist!');
       }
     }
   </script>
 </body>
 
 </html>
+
+
