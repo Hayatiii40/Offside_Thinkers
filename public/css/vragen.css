@@ -1,7 +1,7 @@
 body {
   background-color: black;
   color: white;
-  background-image: url('../Assets/stad.jpg');
+  background-image: url('assets/stad.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   font-family: 'Montserrat', sans-serif;
