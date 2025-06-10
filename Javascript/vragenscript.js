@@ -87,3 +87,4 @@ vragenContainer.addEventListener('click', () => {
     vragenContainer.innerHTML = '<h1>Veelgestelde vragen</h1>';
   }
 });
+
