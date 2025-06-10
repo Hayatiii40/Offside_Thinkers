@@ -1,45 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Football Juggler</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  rel="stylesheet">
   <style>
     body {
+      font-family: 'Montserrat', sans-serif;
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #000000; /* Grass field */
+      background-image: url(/assets/bgr.png);
       background-size: cover;
       background-position: center;
       color: white;
       display: flex;
       flex-direction: column;
       align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+   
+    .title-container {
+      background: linear-gradient(135deg, blue 0%, rgba(67, 198, 172, 0.8) 100%);
+      border-radius: 15px;
+      padding: 1rem 2rem;
+      margin: 20px 0;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(5px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .title-container::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      transform: rotate(30deg);
+      animation: shine 6s infinite linear;
+    }
+
+    @keyframes shine {
+      0% {
+        transform: rotate(30deg) translate(-30%, -30%);
+      }
+
+      100% {
+        transform: rotate(30deg) translate(30%, 30%);
+      }
     }
 
     h1 {
-      margin-top: 20px;
-      font-size: 2.5rem;
-      color: #f5f5f5;
-      text-shadow: 2px 2px 4px #000000;
+      margin: 0;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      letter-spacing: 2px;
+      color: white;
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+      position: relative;
     }
 
-    p {
-      margin: 5px;
+    .title-container p {
+      margin: 0.5rem 0 0;
       font-size: 1.2rem;
-      text-shadow: 1px 1px 2px #000;
+      font-weight: 600;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      position: relative;
     }
 
+    
     canvas {
-      background: url('https://media.istockphoto.com/id/506692747/photo/artificial-grass.jpg?s=2048x2048&w=is&k=20&c=DPyp1UFqu5Mu7mmlsXTgROWcGeiVON5dg_WXfBi02LE=');
       border: 3px solid rgb(195, 199, 255);
+      background-color: rgba(255, 255, 255, 0.400);
       border-radius: 10px;
       margin-top: 20px;
       box-shadow:
         0 0 10px blue,
+        0 0 20px blue,
         0 0 30px blue,
-        0 0 50px blue,
-        0 0 70px blue;
+        0 0 50px blue;
     }
 
     #scoreboard {
@@ -54,17 +102,43 @@
     #scoreboard p {
       margin: 5px 0;
     }
+
+    nav {
+      background-color: black;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+
+      padding: 1rem 0;
+    }
+
+    nav img {
+      margin-top: 0.3rem;
+      height: 50px;
+    }
   </style>
 </head>
+
 <body>
-  <h1>⚽ Football Juggler</h1>
-  <p>Click the football to keep it up!</p>
-  <canvas id="gameCanvas" width="900" height="630"></canvas>
+  <header>
+    <nav>
+      <img src="/Assets/logo.png" alt="Logo" />
+    </nav>
+  </header>
+
+  <div class="title-container">
+    <h1>⚽ SKY SOCCER ⚽</h1>
+    <p>Druk op de bal om te spelen!</p>
+  </div>
+
+  <canvas id="gameCanvas" width="800" height="500"></canvas>
+
   <div id="scoreboard">
     <p>Score: <span id="score">0</span></p>
     <p>High Score: <span id="highScore">0</span></p>
   </div>
 
+  
   <script>
     const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
@@ -72,18 +146,18 @@
     const highScoreText = document.getElementById("highScore");
 
     const football = new Image();
-    football.src = "https://cdn.pixabay.com/photo/2013/07/13/10/51/football-157930_1280.png"; // Working football image
+    football.src = "https://cdn.pixabay.com/photo/2013/07/13/10/51/football-157930_1280.png";
 
     let ball = {
       x: canvas.width / 2,
       y: canvas.height / 2,
-      radius: 50,
+      radius: 45,
       dx: 0,
       dy: 0,
     };
 
-    const gravity = 0.13;
-    const bouncePower = -7;
+    const gravity = 0.16;
+    const bouncePower = -8;
     const sidePush = 3;
 
     let score = 0;
@@ -164,4 +238,5 @@
     football.onload = update;
   </script>
 </body>
+
 </html>
