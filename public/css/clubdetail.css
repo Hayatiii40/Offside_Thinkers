@@ -1,0 +1,188 @@
+:root {
+    --primary: #333333;
+    --secondary: #002038;
+    --dark: #121212;
+    --light: #f8f9fa;
+    --background-blue: rgba(100, 170, 255, 0.85);
+
+}
+
+body {
+    background-image: url("/assets/stad.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+main {
+    background-color: rgba(129, 177, 174, 0.368);
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 40px 30px 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(100, 170, 255, 0.3);
+    backdrop-filter: blur(5px);
+
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+
+.club-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+img {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 5px solid var(--light);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+    background-color: white;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.short-name {
+    color: #121212;
+}
+
+h1 {
+    color: var(--light);
+    margin: 10px 0 20px;
+    font-size: 3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    display: inline-block;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding: 0 20px;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 4px;
+}
+
+.details-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 30px;
+}
+
+
+.detail-item {
+    background: rgba(255, 255, 255, 0.605);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease, background 0.3s ease;
+    border-left: 4px solid var(--primary);
+}
+
+.detail-item:hover {
+    transform: translateX(5px);
+    background: rgba(255, 255, 255, 0.772);
+}
+
+.detail-item strong {
+    color: var(--primary);
+    font-weight: 600;
+    min-width: 120px;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.detail-item span {
+    flex: 1;
+    font-weight: 500;
+    color: #121212;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 12px 25px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.4);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.squad-section {
+    margin-top: 2rem;
+    background-color: var(--light);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.squad-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.squad-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.squad-player {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ccc;
+    color: black;
+}
