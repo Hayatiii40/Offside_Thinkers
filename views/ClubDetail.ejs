@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title || 'Club Details' %>
+    </title>
+    <link rel="stylesheet" href="/CSS/clubdetail.css">
+    <link rel="stylesheet" href="/CSS/reset.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <main>
+        <div class="club-header">
+            <img src="<%= club.crest || '/assets/clubs/default.png' %>" alt="<%= club.name %> logo" />
+            <h1>
+                <%= club.name %>
+            </h1>
+            <% if (club.shortName || club.tla) { %>
+                <p class="short-name">
+                    <%= club.shortName || '' %>
+                        <% if (club.tla) { %>(<%= club.tla %>)<% } %>
+                </p>
+                <% } %>
+        </div>
+
+        <div class="details-container">
+            <% const details=[ { label: 'Stadion' , value: club.venue }, { label: 'League' , value:
+                club.runningCompetitions?.[0]?.name || club.league }, { label: 'Founded' , value: club.founded },
+                club.coach ? { label: 'Coach' , value: `${club.coach.name} (${club.coach.nationality})` } : null, {
+                label: 'Squad Size' , value: club.squad?.length ? `${club.squad.length} players` : null }, {
+                label: 'Club Colors' , value: club.clubColors }, { label: 'Address' , value: club.address }, {
+                label: 'Website' , value: club.website, isLink: true } ].filter(Boolean); %>
+
+                <% details.forEach(detail=> { %>
+                    <% if (detail.value) { %>
+                        <div class="detail-item">
+                            <strong>
+                                <%= detail.label %>:
+                            </strong>
+                            <span>
+                                <% if (detail.isLink) { %>
+                                    <a href="<%= detail.value %>" target="_blank">
+                                        <%= detail.value %>
+                                    </a>
+                                    <% } else { %>
+                                        <%= detail.value %>
+                                            <% } %>
+                            </span>
+                        </div>
+                        <% } %>
+                            <% }); %>
+        </div>
+        <% if (club.squad && club.squad.length> 0) { %>
+            <section class="squad-section">
+                <h2>Teamspelers</h2>
+                <ul class="squad-list">
+                    <% club.squad.forEach(player=> { %>
+                        <li class="squad-player">
+                            <strong>
+                                <%= player.name %>
+                            </strong> – <%= player.position || 'Onbekende positie' %>
+                                <% if (player.nationality) { %>
+                                    (<%= player.nationality %>)
+                                        <% } %>
+                        </li>
+                        <% }); %>
+                </ul>
+            </section>
+            <% } else { %>
+                <p>Geen teamspelers beschikbaar voor deze club.</p>
+                <% } %>
+
+
+                    <a href="/" class="back-btn">Terug naar overzicht</a>
+    </main>
+</body>
+
+</html>
