@@ -215,3 +215,5 @@ fetch('/api/save-score', {
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ score: scoreTeller })
 });
+
+
