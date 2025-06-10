@@ -438,7 +438,7 @@ app.get("/registratie", (req, res) => {
 });
  
 
-app.get("/menu", async (req: Request, res: Response) => {
+app.get("/menu", isAuthenticated, async (req: Request, res: Response) => {
   try {
     const users = await database.collection("users").find().toArray();
     res.render("Menupagina", { users });
