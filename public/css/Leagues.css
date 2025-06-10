@@ -1,6 +1,6 @@
 body {
   font-family: 'Montserrat', sans-serif;
-  background: url('assets/stad.jpg') no-repeat center center fixed;
+  background: url('../assets/stad.jpg') no-repeat center center fixed;
   background-size: cover;
   display: flex;
   flex-direction: column;
