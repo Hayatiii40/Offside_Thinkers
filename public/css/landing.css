@@ -1,5 +1,5 @@
 body {
-    background-image: url("/Assets/landbg.png");
+    background-image: url("/assets/landbg.png");
     height: 98vh;
     width: 98vw;
     background-size: cover;
@@ -250,38 +250,38 @@ article:hover {
 
 
 #fifa {
-    background-image: url('/Assets/stad.jpg');
+    background-image: url('/assets/stad.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 #fortnite {
-    background-image: url('/Assets/fortnite.jpg');
+    background-image: url('/assets/fortnite.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 #lego {
-    background-image: url('/Assets/legogo.jpg');
+    background-image: url('/assets/legogo.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     text-align: center;
 }
 
 #lotr {
-    background-image: url('/Assets/lotr.jpg');
+    background-image: url('/assets/lotr.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 #MTG {
-    background-image: url('/Assets/mtg.jpg');
+    background-image: url('/assets/mtg.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 #pokemon {
-    background-image: url('/Assets/poke.png');
+    background-image: url('/assets/poke.png');
     background-size: cover;
     background-repeat: no-repeat;
 }
