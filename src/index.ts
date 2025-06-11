@@ -557,18 +557,16 @@ declare module "express-session" {
 
 
 
-// app.get("/skysoccer", (req,res)=>{
-//   res.render("Jumpgame",{title:"SkySoccer"})
-// })
+ app.get("/skysoccer", (req,res)=>{
+   res.render("Jumpgame" ,{ title: "SkySoccer" })
+ })
 
 
 app.get("/veelgesteldevragen", (req, res) => {
   res.render("Veelgesteldevragen", { title: "Veelgestelde Vragen" });
 });
 
-app.get("/soccersky", (req, res) => {
-  res.render("JumpGame", { title: "Soccer Sky" });
-});
+
 
 app.get("/clubdetails/:id", async (req: express.Request, res: express.Response) => {
   try {
