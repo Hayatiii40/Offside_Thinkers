@@ -557,9 +557,9 @@ declare module "express-session" {
 
 
 
-app.get("/skysoccer", (req,res)=>{
-  res.render("Jumpgame",{title:"SkySoccer"})
-})
+// app.get("/skysoccer", (req,res)=>{
+//   res.render("Jumpgame",{title:"SkySoccer"})
+// })
 
 
 app.get("/veelgesteldevragen", (req, res) => {
