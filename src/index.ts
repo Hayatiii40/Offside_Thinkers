@@ -558,7 +558,7 @@ declare module "express-session" {
 
 
  app.get("/skysoccer", (req,res)=>{
-   res.render("Jumpgame" ,{ title: "SkySoccer" })
+   res.render("JumpGame" ,{ title: "SkySoccer" })
  })
 
 
