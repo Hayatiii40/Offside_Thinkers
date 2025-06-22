@@ -39,9 +39,10 @@
                 <a href="/clubdetails/<%= team.id %>" class="team-name">
                   <%= team.name %>
                 </a>
-                <button
+                <button style="color:#00ff00"
                   onclick='addToFavorites(JSON.parse(`<%- JSON.stringify({name: team.name, crest: team.crest}) %>`))'>
-                  👍 Favoriete
+                  <i class="fa-solid fa-thumbs-up"></i>
+                  Favoriete
                 </button>
 
 

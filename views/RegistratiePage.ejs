@@ -7,6 +7,7 @@
   <title>Registratie</title>
   <link rel="stylesheet" href="/CSS/reset.css" />
   <link rel="stylesheet" href="/CSS/registratie.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="/Javascript/Registratie.js" defer></script>
 </head>
@@ -14,6 +15,9 @@
 <body>
   <header>
     <div class="nav">
+      <a href="/inlog" class="back-button">
+        <i class="fas fa-arrow-left" style="color: white;"></i>
+      </a>
       <img src="/Assets/logo.png" alt="Logo" />
     </div>
   </header>
@@ -39,7 +43,8 @@
 
             <label for="confirm-password">Herhaal wachtwoord</label>
             <input type="password" id="confirm-password" name="confirm-password" required />
-
+            <p id="al-ac">Heb jij al een account?</p>
+            <a href="/inlog" class="loginback">Log in</a>
             <button type="submit">Registreren</button>
       </form>
     </div>

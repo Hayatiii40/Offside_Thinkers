@@ -25,9 +25,12 @@ main {
   grid-template-columns: 50vw 50vw;
 }
 
+.Account {
+  line-height: 25px;
+}
+
 #aanmaken {
   text-decoration: underline;
-  line-height: 7px;
 }
 
 #aanmaken:hover {
@@ -62,7 +65,25 @@ h2 {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-.driehoek {
+.back-button {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+  z-index: 10;
+  background-color: transparent;
+  padding: 10px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* .driehoek {
   width: 5px;
   height: 5px;
   border-left: 7.5px solid transparent;
@@ -70,7 +91,9 @@ h2 {
   border-bottom: 15px solid lightgreen;
   margin: 0 10px;
   padding: 5px 0 10px;
-}
+} */
+
+
 
 .container_beneden {
   position: absolute;
@@ -125,12 +148,11 @@ h1 {
 
 form {
   margin: auto;
-  height: 500px;
   border-radius: 10px;
   padding: 50px;
   line-height: 40px;
   width: 500px;
-  background: linear-gradient(to right, #a6a6a6, #ffffff);
+  background: linear-gradient(to right, #a6a6a6d8, #ffffffe0);
   position: relative;
   top: 100px;
   text-align: center;
@@ -187,11 +209,12 @@ button {
   padding: 1em;
   font-weight: bold;
   text-align: center;
+  margin-top: 10px;
   text-transform: uppercase;
   transition: 0.2s;
   border-radius: 5px;
   height: 70px;
-  margin-top: 50px;
+
   width: 400px;
   opacity: 0.8;
   letter-spacing: 1px;
@@ -206,6 +229,19 @@ button:hover {
 button:active {
   top: 4px;
   box-shadow: seagreen 0px 3px 2px, #000 0px 3px 5px;
+}
+
+.loginback {
+  height: 30px;
+  text-decoration: underline;
+}
+
+#al-ac {
+  height: 30px;
+}
+
+.loginback:hover {
+  text-decoration: none;
 }
 
 @media screen and (max-width: 900px) {
@@ -247,13 +283,14 @@ button:active {
   }
 
   button {
-    margin-top: 20px;
+    height: 70px;
     width: 300px;
   }
 
   h2 {
     margin-right: 0px;
     position: relative;
+    font-size: 25px;
   }
 
   body {

@@ -67,8 +67,12 @@ main {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    flex-basis: 500px;
+    flex-basis: 800px;
 
+}
+
+.zone2 a article {
+    width: 400px;
 }
 
 .zone1 {
@@ -81,7 +85,7 @@ main {
 }
 
 input {
-    padding-left: 3rem;
+    padding-left: 2.3rem;
     width: 27rem;
     height: 2.5rem;
     border: 2px solid #727272;
@@ -94,7 +98,7 @@ input {
 
 button {
     background-color: #5e1d32;
-    height: 2rem;
+    height: 2.5rem;
     width: 10rem;
     border-radius: 5rem;
     display: flex;
@@ -106,13 +110,17 @@ button {
     border: 1px solid white;
 }
 
+button:active {
+    transform: scale(0.96);
+}
+
 
 #warning {
-    border: 2px solid #ff4d6d;
+    border: 1px solid #f5b2c8;
     padding: 1rem 2rem;
     height: 15rem;
     width: 25rem;
-    background: linear-gradient(135deg, #5e1d32 0%, #8a2a44 100%);
+    background: linear-gradient(135deg, #5e1d32 0%, #8a2a44a1 100%);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -120,6 +128,7 @@ button {
     border-radius: 15px;
     position: absolute;
     right: 40vw;
+    top: 50vh;
     z-index: 900;
     font-size: 1.6rem;
     font-weight: 600;
@@ -175,8 +184,8 @@ button {
     height: 3.5rem;
     width: 14rem;
     font-size: 1.3rem;
-    border: none;
-    background: linear-gradient(to right, #ff4d6d, #c9184a);
+    border: 1px solid #f5b2c8;
+    background: linear-gradient(to right, #cf435d, #5e1d32);
     color: white;
     border-radius: 50px;
     cursor: pointer;
@@ -215,8 +224,6 @@ button {
     left: 100%;
 }
 
-
-
 #vergrootglas {
     position: relative;
     left: 30px;
@@ -250,38 +257,38 @@ article:hover {
 
 
 #fifa {
-    background-image: url('/Assets/stad.jpg');
+    background-image: url('/assets/stad.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 #fortnite {
-    background-image: url('/Assets/fortnite.jpg');
+    background-image: url('/assets/fortnite.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 #lego {
-    background-image: url('/Assets/legogo.jpg');
+    background-image: url('/assets/legogo.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     text-align: center;
 }
 
 #lotr {
-    background-image: url('/Assets/lotr.jpg');
+    background-image: url('/assets/lotr.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 #MTG {
-    background-image: url('/Assets/mtg.jpg');
+    background-image: url('/assets/mtg.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 #pokemon {
-    background-image: url('/Assets/poke.png');
+    background-image: url('/assets/poke.png');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -294,13 +301,19 @@ article:hover {
 
 @media (max-width: 1120px) {
     #warning {
-        left: 30vw;
+        width: 20rem;
+
     }
 }
 
 @media (max-width: 650px) {
-    article {
-        width: 100vw;
+    .zone2 a article {
+        width: 320px;
+    }
+
+    #warning {
+        width: 20rem;
+        left: 5rem;
     }
 
     input {

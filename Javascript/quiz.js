@@ -98,11 +98,11 @@ function startTimer() {
       if (timeLeft <= 0) {
         clearInterval(countdown);
         clockSound.pause();
-        timerElement.textContent = "⏱ Tijd is op!";
+        timerElement.textContent = "⏱ 0";
         timerElement.style.color = "red";
         timerElement.style.fontWeight = "bold";
         timerElement.style.fontSize = "2rem";
-        endGame("⏱ Tijd is op!");
+        endGame("⏱ 0");
       }
     }
   }, 1000);

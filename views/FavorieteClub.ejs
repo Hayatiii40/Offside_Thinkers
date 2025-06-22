@@ -29,78 +29,29 @@
         </div>
       </section>
 
-      <section class="zone2" id="favorites-list"></section>
+      <section class="zone2" id="favorites-list">
+        <% if (clubs.length===0) { %>
+          <p>Geen favoriete clubs gevonden.</p>
+          <% } else { %>
+            <% clubs.forEach(club=> { %>
+              <div class="team">
+                <img src="<%= club.crest %>" alt="<%= club.name %>" class="team-logo" />
+                <span>
+                  <%= club.name %>
+                </span>
+                <div class="button-wrapper">
+                  <a href="/clubdetails/<%= club.id %>" class="info-btn">Info</a>
+                  <form method="POST" action="/verwijder-favoriet" style="display:inline;">
+                    <input type="hidden" name="clubId" value="<%= club.id %>" />
+                    <button type="submit" class="delete-btn">Verwijderen</button>
+                  </form>
+                </div>
+              </div>
+              <% }) %>
+                <% } %>
+      </section>
     </div>
   </main>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const container = document.getElementById("favorites-list");
-      const searchInput = document.getElementById("searchbar");
-
-
-      let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
-
-
-      function removeFavorite(name) {
-        favorites = favorites.filter(c => c.name.toLowerCase() !== name);
-        localStorage.setItem("favorites", JSON.stringify(favorites));
-        render(favorites);
-      }
-
-
-      function render(clubs) {
-        container.innerHTML = "";
-        if (clubs.length === 0) {
-          container.innerHTML = "<p>Geen favoriete clubs gevonden.</p>";
-          return;
-        }
-
-        clubs.forEach(club => {
-          const div = document.createElement("div");
-          div.className = "team";
-          div.setAttribute("data-name", club.name.toLowerCase());
-
-          div.innerHTML = `
-          <img src="${club.crest}" alt="${club.name}" class="team-logo" />
-          <span>${club.name}</span>
-          <div class="button-wrapper">
-            <button class="info-btn">Info</button>
-            <button class="delete-btn">Verwijderen</button>
-          </div>`
-            ;
-
-
-          div.querySelector(".info-btn").addEventListener("click", (e) => {
-            e.stopPropagation();
-            if (club.id) {
-              window.location.href = `/clubdetails/${club.id}`;
-            } else {
-              alert("Geen club-ID gevonden.");
-            }
-          });
-
-
-          div.querySelector(".delete-btn").addEventListener("click", (e) => {
-            e.stopPropagation();
-            removeFavorite(club.name.toLowerCase());
-          });
-
-          container.appendChild(div);
-        });
-      }
-
-
-      render(favorites);
-
-
-      document.getElementById("searchbutton").addEventListener("click", () => {
-        const query = searchInput.value.toLowerCase();
-        const filtered = favorites.filter(c => c.name.toLowerCase().includes(query));
-        render(filtered);
-      });
-    });
-  </script>
 
 </body>
 

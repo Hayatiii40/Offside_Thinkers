@@ -138,7 +138,7 @@ main {
 }
 
 .delete-btn,
-.info {
+.info-btn {
   background-color: rgb(15, 1, 73);
   color: white;
   border: none;
@@ -147,10 +147,11 @@ main {
   width: 90%;
   cursor: pointer;
   font-weight: bold;
+  margin-top: 3px;
 }
 
 .delete-btn:hover,
-.info:hover {
+.info-btn:hover {
   background-color: rgb(25, 10, 90);
 }
 
