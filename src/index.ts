@@ -229,13 +229,7 @@ app.get("/menu",isAuthenticated, async (req: Request, res: Response) => {
   }
 });
 
-app.get("/blacklist", isAuthenticated, (req, res) => {
-  
-  res.render("Blacklistpage", {
-    title: "Blacklist",
-    user: req.session.user
-  });
-});
+
 
 /*-favc-*/
 app.get("/favorieteclub", isAuthenticated, async (req, res) => {
@@ -258,7 +252,18 @@ app.get("/favorieteclub", isAuthenticated, async (req, res) => {
   return res.status(500).render("error",{message: "Favorieten laden is niet gelukt, sory."});
 }
 });
-
+app.post("/verwijder-favoriet",async (req,res)=>{
+  const username = req.session.user?.username;
+  const clubId = parseInt(req.body.clubId);
+  try{
+    await database.collection<User>("users").updateOne({username},{$pull:{favourites:clubId}});
+    
+    res.redirect("/favorieteclub")
+  }catch(err){
+    console.error("Fout bij het verwijderen",err);
+    res.status(500).send("Foutbij het verwijderen");
+  }
+})
 app.post("/toevoegen-favorieteclub",async (req,res)=>{
   const username = req.session.user?.username;
   const clubId = parseInt(req.body.clubId);
@@ -266,7 +271,7 @@ app.post("/toevoegen-favorieteclub",async (req,res)=>{
 
     await database.collection<User>("users").updateOne({username},{$addToSet:{favourites:clubId}});
 
-    res.redirect("/favorieteclub");
+    res.redirect("/alleclubs")
   }catch(er){
     console.error("Fout bij het toevoegen",er)
     res.status(500).send("Fout bij het toeveogen");
@@ -274,19 +279,54 @@ app.post("/toevoegen-favorieteclub",async (req,res)=>{
 })
 
 
-app.post("/verwijder-favoriet",async (req,res)=>{
-  const username = req.session.user?.username;
-  const clubId = parseInt(req.body.clubId);
-  try{
-    await database.collection<User>("user").updateOne({username},{$pull:{favourites:clubId}});
-    res.redirect("/favorieteclub")
 
+/*-favc-*/
+/*-blacklist-*/
+app.post("/toevoegen-blacklist", async(req,res)=>{
+  try{
+    const username = req.session.user?.username;
+    const clubId = req.body.clubId;
+    
+    if(!username ){
+      console.error("Probleem bij het vinden van de username.")
+    }
+    if(!clubId){
+      console.error("Probleem bij het vinden van de club id.")
+    }
+
+    await database.collection<User>("users").updateOne({username},{$addToSet:{blacklistedClubs:clubId}});
+    res.redirect("/alleclubs")
+    
   }catch(err){
-    console.error("Fout bij het verwijderen",err);
-    res.status(500).send("Foutbij het verwijderen");
+    console.error("Fout bij het toeveogen van blacklisted club")
+    return res.status(500).render("Fout bij het toevoegen van blacklisted team");
   }
 })
-/*-favc-*/
+app.get("/blacklist", isAuthenticated, async (req, res) => {
+  try {
+    let username = req.session.user?.username;
+    let user = await database.collection<User>("users").findOne({username});
+
+    if(!user){
+      return res.status(404).render("error",{message:"Gebruiker niet gevonden"});
+    }
+    const blacklistedClubs = await database.collection<Club>("teams").find({id:{$in:user.blacklistedClubs}}).toArray();
+    
+    res.render("Blacklistpage", {
+    title: "Blacklist",
+    user: req.session.user,
+    clubs: blacklistedClubs
+  });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Probleem bij het ophalen van de ")
+  }
+  
+});
+
+
+
+/*-blacklist-*/
 app.get("/alleclubs", isAuthenticated, async (req, res) => {
   try {
     const clubs = await database.collection("teams").find().toArray();

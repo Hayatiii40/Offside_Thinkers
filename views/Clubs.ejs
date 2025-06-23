@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <a href="javascript:history.back()" class="back-button">
+  <a href="/menu" class="back-button">
     <i class="fas fa-arrow-left"></i>
   </a>
 
@@ -48,6 +48,7 @@
                     Favoriet</button>
                 </form>
                 <form method="POST" class="blacklist-form" action="/toevoegen-blacklist">
+                  <input type="hidden" name="clubId" value="<%= club.id %>">
                   <button class="blacklist-btn" type="submit" style="color:red">
                     <i class="fa-solid fa-x"></i>
                     Blacklist</button>
