@@ -129,8 +129,7 @@ main {
 }
 
 .team-logo {
-  width: 70px;
-  height: 70px;
+  height: 115px;
 }
 
 .team-name {
@@ -142,11 +141,18 @@ main {
   background-color: rgb(15, 1, 73);
   color: white;
   border: none;
-  padding: 0.6rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 30px;
   border-radius: 8px;
   width: 90%;
   cursor: pointer;
   font-weight: bold;
+}
+
+.buttons * {
+  margin-top: 5px;
 }
 
 .delete-btn:hover,

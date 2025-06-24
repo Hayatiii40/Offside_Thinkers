@@ -34,7 +34,7 @@
 
       <section class="zone2" id="clubs-list">
         <% clubs.forEach(club=> { %>
-          <div class="team" data-name="<%= club.name.toLowerCase() %>">
+          <div class="team" class="<%= club.name.toLowerCase() %>">
             <% if (club.crest) { %>
               <img src="<%= club.crest %>" alt="<%= club.name %> logo" class="team-logo" />
               <% } %>

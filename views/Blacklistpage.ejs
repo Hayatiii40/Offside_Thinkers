@@ -33,6 +33,29 @@
             </section>
 
             <section class="zone2" id="favorites-list">
+                <% if(clubs.length===0) { %>
+                    <p>Er is geen blacklisted club</p>
+                    <% } %>
+
+                        <% clubs.forEach(club=> { %>
+                            <div class="team">
+                                <img class="team-logo" src="<%= club.crest %>" alt="<%= club.name %>">
+                                <span class="team-name">
+                                    <%= club.name %>
+                                </span>
+                                <div class="buttons">
+                                    <a href="/clubdetails/<%= club.id %>">
+                                        <button class="info">Info</button>
+                                    </a>
+
+                                    <form method="POST" action="/verwijder-blacklist">
+                                        <input type="hidden" name="clubId" value="<%= club.id %>">
+                                        <button type="submit" class="delete-btn">Verwijderen</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <% }); %>
+
             </section>
         </div>
     </main>

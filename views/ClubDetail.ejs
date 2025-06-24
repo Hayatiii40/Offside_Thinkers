@@ -7,14 +7,22 @@
     </title>
     <link rel="stylesheet" href="/CSS/clubdetail.css">
     <link rel="stylesheet" href="/CSS/reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
+    <header>
+        <img id="teamlogo" src="/assets/Logo.png" alt="offsidelogo" />
+        <img id="ealogo" src="/assets/eaLogo.png" alt="ealogo" />
+        <a onclick="history.go(-1); return false;" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+    </header>
     <main>
         <div class="club-header">
-            <img src="<%= club.crest || '/assets/clubs/default.png' %>" alt="<%= club.name %> logo" />
+            <img class="teamlogo" src="<%= club.crest || '/assets/clubs/default.png' %>" alt="<%= club.name %> logo" />
             <h1>
                 <%= club.name %>
             </h1>
@@ -73,8 +81,6 @@
                 <p>Geen teamspelers beschikbaar voor deze club.</p>
                 <% } %>
 
-
-                    <a href="/" class="back-btn">Terug naar overzicht</a>
     </main>
 </body>
 

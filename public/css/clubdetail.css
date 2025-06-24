@@ -17,9 +17,34 @@ body {
     font-family: 'Montserrat', sans-serif;
     color: var(--light);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px;
+}
+
+.back-button {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+    z-index: 9999;
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.back-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#ealogo,
+#teamlogo {
+    height: 3rem;
+    margin: 0 10px;
+    background-color: none;
 }
 
 main {
@@ -54,7 +79,7 @@ main {
     text-align: center;
 }
 
-img {
+.teamlogo {
     width: 180px;
     height: 180px;
     object-fit: contain;

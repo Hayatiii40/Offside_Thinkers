@@ -255,7 +255,7 @@ app.get("/favorieteclub", isAuthenticated, async (req, res) => {
 app.post("/verwijder-favoriet",async (req,res)=>{
   const username = req.session.user?.username;
   const clubId = parseInt(req.body.clubId);
-  try{
+  try{ 
     await database.collection<User>("users").updateOne({username},{$pull:{favourites:clubId}});
     
     res.redirect("/favorieteclub")
@@ -282,26 +282,6 @@ app.post("/toevoegen-favorieteclub",async (req,res)=>{
 
 /*-favc-*/
 /*-blacklist-*/
-app.post("/toevoegen-blacklist", async(req,res)=>{
-  try{
-    const username = req.session.user?.username;
-    const clubId = req.body.clubId;
-    
-    if(!username ){
-      console.error("Probleem bij het vinden van de username.")
-    }
-    if(!clubId){
-      console.error("Probleem bij het vinden van de club id.")
-    }
-
-    await database.collection<User>("users").updateOne({username},{$addToSet:{blacklistedClubs:clubId}});
-    res.redirect("/alleclubs")
-    
-  }catch(err){
-    console.error("Fout bij het toeveogen van blacklisted club")
-    return res.status(500).render("Fout bij het toevoegen van blacklisted team");
-  }
-})
 app.get("/blacklist", isAuthenticated, async (req, res) => {
   try {
     let username = req.session.user?.username;
@@ -319,10 +299,44 @@ app.get("/blacklist", isAuthenticated, async (req, res) => {
   });
   } catch (error) {
     console.log(error);
-    res.status(500).send("Probleem bij het ophalen van de ")
+    res.status(500).send("Probleem bij het ophalen van de blacklisted teams")
   }
   
 });
+app.post("/toevoegen-blacklist", async(req,res)=>{
+  try{
+    const username = req.session.user?.username;
+    const clubId = parseInt(req.body.clubId);    
+    if(!username ){
+      return console.error("Probleem bij het vinden van de username.")
+    }
+    if(!clubId){
+      return console.error("Probleem bij het vinden van de club id.")
+    }
+    await database.collection<User>("users").updateOne({username},{$addToSet:{blacklistedClubs:clubId}});
+    res.redirect("/alleclubs")
+  }catch(err){
+    console.error("Fout bij het toeveogen van blacklisted club")
+    return res.status(500).render("Fout bij het toevoegen van blacklisted team");
+  }
+})
+app.post("/verwijder-blacklist",async (req,res)=>{
+  try {
+    const username = req.session.user?.username;
+    const clubId = parseInt(req.body.clubId);
+    if(!clubId){
+      return console.error("Probleem bij het vinden van de club id");
+    }
+    if(!username){
+      return console.error("Probleem bij het vinden van de username");
+    }
+    await database.collection<User>("users").updateOne({username},{$pull:{blacklistedClubs:clubId}});
+    res.redirect("/blacklist");
+  } catch (error) {
+    console.error("Fout bij het verwijderen van de blackliste club")
+    return res.status(500).render("Fout bij het verwijderen van de blacklisted club");
+  }
+})
 
 
 
@@ -449,8 +463,6 @@ app.get("/clubdetails/:id", async (req: express.Request, res: express.Response) 
       res.status(404).send("Club not found");
       return;
     }
-
-    
 
     res.render("ClubDetail", { 
       title: club.name, 
